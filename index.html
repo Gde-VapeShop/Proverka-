@@ -1645,34 +1645,6 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 (function () {
   "use strict";
 
-    document.addEventListener("change", function(event) {
-      var input = event.target;
-      if (!input || !input.classList || !input.classList.contains("photo-input")) return;
-      var wrap = input.closest(".photo-wrap");
-      var list = wrap ? wrap.querySelector(".photo-list") : null;
-      if (!list) return;
-      Array.from(input.files || []).forEach(function(file) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-          var thumb = document.createElement("div");
-          thumb.className = "photo-thumb";
-          var img = document.createElement("img");
-          img.src = e.target.result;
-          var remove = document.createElement("button");
-          remove.type = "button";
-          remove.className = "photo-remove";
-          remove.textContent = "×";
-          remove.addEventListener("click", function() { thumb.remove(); updateSummary(); });
-          thumb.appendChild(img);
-          thumb.appendChild(remove);
-          list.appendChild(thumb);
-          updateSummary();
-        };
-        reader.readAsDataURL(file);
-      });
-      input.value = "";
-    }, false);
-
   function init() {
     var items = Array.prototype.slice.call(document.querySelectorAll(".check-item"));
     var statuses = Array.prototype.slice.call(document.querySelectorAll(".check-status"));
@@ -1850,6 +1822,48 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
       )) updateSummary();
     }, false);
 
+    document.addEventListener("change", function(event) {
+      var input = event.target;
+      if (!input || !input.classList || !input.classList.contains("photo-input")) return;
+
+      var wrap = input.closest(".photo-wrap");
+      var list = wrap ? wrap.querySelector(".photo-list") : null;
+      if (!list) return;
+
+      Array.from(input.files || []).forEach(function(file) {
+        if (!file.type || file.type.indexOf("image/") !== 0) return;
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var thumb = document.createElement("div");
+          thumb.className = "photo-thumb";
+
+          var img = document.createElement("img");
+          img.src = e.target.result;
+          img.alt = "Фото проверки";
+
+          var remove = document.createElement("button");
+          remove.type = "button";
+          remove.className = "photo-remove";
+          remove.textContent = "×";
+          remove.addEventListener("click", function() {
+            thumb.remove();
+            updateSummary();
+          });
+
+          thumb.appendChild(img);
+          thumb.appendChild(remove);
+          list.appendChild(thumb);
+          updateSummary();
+        };
+
+        reader.readAsDataURL(file);
+      });
+
+      input.value = "";
+    }, false);
+
+
     function recalculate() {
       var total = 0;
       var maximum = 0;
@@ -2000,8 +2014,7 @@ document.addEventListener("click", function (event) {
         list.innerHTML = "";
       });
       updateSummary();
-      updateSummary();
-    recalculate();
+      recalculate();
     }, false);
 
     updateSummary();
