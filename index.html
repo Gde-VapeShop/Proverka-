@@ -260,6 +260,17 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
   input,select,textarea{background:white!important;color:#111!important;border:0!important;}
 }
 
+</style><style id="photoFeatureCSS">
+.photo-wrap{display:block!important;margin-top:12px!important;width:100%!important}
+.photo-btn{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;min-height:42px!important;padding:0 15px!important;border:1px solid rgba(214,164,76,.55)!important;border-radius:11px!important;background:rgba(214,164,76,.12)!important;color:#e7c27d!important;cursor:pointer!important;font-weight:700!important;font-size:14px!important;box-sizing:border-box!important}
+.photo-btn input{display:none!important}
+.photo-list{display:flex!important;flex-wrap:wrap!important;gap:9px!important;margin-top:10px!important}
+.photo-thumb{position:relative!important;display:block!important}
+.photo-thumb img{display:block!important;width:112px!important;height:88px!important;object-fit:cover!important;border-radius:10px!important;border:1px solid rgba(255,255,255,.15)!important}
+.photo-remove{position:absolute!important;right:4px!important;top:4px!important;width:24px!important;height:24px!important;padding:0!important;border:0!important;border-radius:50%!important;background:rgba(0,0,0,.75)!important;color:#fff!important;font-size:18px!important;line-height:24px!important;text-align:center!important;cursor:pointer!important}
+.summary-photo-list{display:flex!important;flex-wrap:wrap!important;gap:9px!important;margin-top:10px!important}
+.summary-photo-list img{display:block!important;width:115px!important;height:90px!important;object-fit:cover!important;border-radius:9px!important;border:1px solid rgba(255,255,255,.15)!important}
+@media print{.photo-btn,.photo-remove{display:none!important}.photo-list,.summary-photo-list{display:flex!important}.photo-thumb,.summary-photo-list img{break-inside:avoid}}
 </style></head><body><div id="app">
 <header class="hero"><h1>Контроль магазина</h1><p>Удобная проверка, автоматические баллы и несколько комментариев к каждому пункту</p></header>
 <section class="card"><h2>Данные проверки</h2><div class="grid">
@@ -281,7 +292,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Чистота и порядок">
 <div class="check-head">
@@ -298,7 +309,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Чистота и порядок">
 <div class="check-head">
@@ -315,7 +326,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Чистота и порядок">
 <div class="check-head">
@@ -332,7 +343,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Чистота и порядок">
 <div class="check-head">
@@ -349,7 +360,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Витрины и выкладка">
 <div class="check-head">
@@ -366,7 +377,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Витрины и выкладка">
 <div class="check-head">
@@ -383,7 +394,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Витрины и выкладка">
 <div class="check-head">
@@ -400,7 +411,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Витрины и выкладка">
 <div class="check-head">
@@ -417,7 +428,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Остатки и склад">
 <div class="check-head">
@@ -434,7 +445,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Остатки и склад">
 <div class="check-head">
@@ -451,7 +462,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Остатки и склад">
 <div class="check-head">
@@ -468,7 +479,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Остатки и склад">
 <div class="check-head">
@@ -485,7 +496,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Остатки и склад">
 <div class="check-head">
@@ -502,7 +513,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Касса и расходники">
 <div class="check-head">
@@ -519,7 +530,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Касса и расходники">
 <div class="check-head">
@@ -536,7 +547,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Касса и расходники">
 <div class="check-head">
@@ -553,7 +564,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Касса и расходники">
 <div class="check-head">
@@ -570,7 +581,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Касса и расходники">
 <div class="check-head">
@@ -587,7 +598,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Касса и расходники">
 <div class="check-head">
@@ -604,7 +615,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Касса и расходники">
 <div class="check-head">
@@ -621,7 +632,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Касса и расходники">
 <div class="check-head">
@@ -638,7 +649,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Касса и расходники">
 <div class="check-head">
@@ -655,7 +666,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Касса и расходники">
 <div class="check-head">
@@ -672,7 +683,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Персонал и сервис">
 <div class="check-head">
@@ -689,7 +700,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Персонал и сервис">
 <div class="check-head">
@@ -706,7 +717,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Персонал и сервис">
 <div class="check-head">
@@ -723,7 +734,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Персонал и сервис">
 <div class="check-head">
@@ -740,7 +751,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="3" data-section="Персонал и сервис">
 <div class="check-head">
@@ -757,7 +768,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="2" data-section="Продажи и стандарты">
 <div class="check-head">
@@ -774,7 +785,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="2" data-section="Продажи и стандарты">
 <div class="check-head">
@@ -791,7 +802,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="2" data-section="Продажи и стандарты">
 <div class="check-head">
@@ -808,7 +819,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="2" data-section="Продажи и стандарты">
 <div class="check-head">
@@ -825,7 +836,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="2" data-section="Оборудование и безопасность">
 <div class="check-head">
@@ -842,7 +853,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="2" data-section="Оборудование и безопасность">
 <div class="check-head">
@@ -859,7 +870,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="2" data-section="Оборудование и безопасность">
 <div class="check-head">
@@ -876,7 +887,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="2" data-section="Оборудование и безопасность">
 <div class="check-head">
@@ -893,7 +904,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="2" data-section="Оборудование и безопасность">
 <div class="check-head">
@@ -910,7 +921,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="1" data-section="Задачи и управляемость">
 <div class="check-head">
@@ -927,7 +938,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="1" data-section="Задачи и управляемость">
 <div class="check-head">
@@ -944,7 +955,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="1" data-section="Задачи и управляемость">
 <div class="check-head">
@@ -961,7 +972,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="1" data-section="Задачи и управляемость">
 <div class="check-head">
@@ -978,7 +989,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article>
 <article class="check-item" data-max="1" data-section="Задачи и управляемость">
 <div class="check-head">
@@ -995,7 +1006,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </article></div></section>
 <section class="card"><h2>Критические нарушения</h2><textarea id="critical" placeholder="Что нужно исправить срочно?"></textarea></section>
 <section class="card"><h2>Товар и расходники</h2><p class="note">У ароматизаторов нет количества — только статус и комментарии.</p><details class="inv-group" open=""><summary><span>Товар магазина</span><small>3 поз.</small></summary><div class="inv-list">
@@ -1007,7 +1018,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Товар магазина">
@@ -1018,7 +1029,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Товар магазина">
@@ -1029,7 +1040,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div></div></details><details class="inv-group" open=""><summary><span>Ароматизаторы</span><small>7 поз.</small></summary><div class="inv-list">
 <div class="inv-item" data-category="Ароматизаторы">
@@ -1039,7 +1050,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Ароматизаторы">
@@ -1049,7 +1060,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Ароматизаторы">
@@ -1059,7 +1070,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Ароматизаторы">
@@ -1069,7 +1080,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Ароматизаторы">
@@ -1079,7 +1090,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Ароматизаторы">
@@ -1089,7 +1100,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Ароматизаторы">
@@ -1099,7 +1110,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div></div></details><details class="inv-group" open=""><summary><span>Необходимые ароматизаторы</span><small>список</small></summary><div class="inv-list">
 <div class="inv-item" data-category="Необходимые ароматизаторы">
@@ -1108,7 +1119,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Список ароматизаторов</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Ароматизатор — фирма" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div></div></details><details class="inv-group" open=""><summary><span>Размен</span><small>комментарии</small></summary><div class="inv-list">
 <div class="inv-item" data-category="Размен">
@@ -1117,7 +1128,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Напишите, что нужно по размену и прочему" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div></div></details><details class="inv-group"><summary><span>Шприцы — объем и количество</span><small>4 поз.</small></summary><div class="inv-list">
 <div class="inv-item" data-category="Шприцы — объем и количество">
@@ -1128,7 +1139,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Шприцы — объем и количество">
@@ -1139,7 +1150,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Шприцы — объем и количество">
@@ -1150,7 +1161,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Шприцы — объем и количество">
@@ -1161,7 +1172,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div></div></details><details class="inv-group" open=""><summary><span>Флаконы — количество</span><small>5 поз.</small></summary><div class="inv-list">
 <div class="inv-item" data-category="Флаконы — количество">
@@ -1172,7 +1183,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Флаконы — количество">
@@ -1183,7 +1194,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Флаконы — количество">
@@ -1194,7 +1205,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Флаконы — количество">
@@ -1205,7 +1216,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Флаконы — количество">
@@ -1216,7 +1227,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div></div></details><details class="inv-group"><summary><span>Наклейки — количество</span><small>8 поз.</small></summary><div class="inv-list">
 <div class="inv-item" data-category="Наклейки — количество">
@@ -1227,7 +1238,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Наклейки — количество">
@@ -1238,7 +1249,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Наклейки — количество">
@@ -1249,7 +1260,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Наклейки — количество">
@@ -1260,7 +1271,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Наклейки — количество">
@@ -1271,7 +1282,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div><div class="inv-item" data-category="Наклейки — количество">
 <div class="inv-name"><span class="small-num">G</span>Наклейки Gorilla 15 мл — количество</div>
@@ -1280,7 +1291,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Наклейки — количество">
@@ -1290,7 +1301,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Наклейки — количество">
@@ -1300,7 +1311,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 </div></details><details class="inv-group"><summary><span>Gorilla — количество</span><small>4 поз.</small></summary><div class="inv-list">
@@ -1312,7 +1323,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Gorilla — количество">
@@ -1323,7 +1334,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Gorilla — количество">
@@ -1334,7 +1345,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Gorilla — количество">
@@ -1345,7 +1356,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div></div></details><details class="inv-group"><summary><span>Дополнительные позиции</span><small>6 поз.</small></summary><div class="inv-list">
 <div class="inv-item" data-category="Дополнительные позиции">
@@ -1355,7 +1366,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Дополнительные позиции">
@@ -1365,7 +1376,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Дополнительные позиции">
@@ -1375,7 +1386,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Дополнительные позиции">
@@ -1385,7 +1396,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Дополнительные позиции">
@@ -1395,7 +1406,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 <div class="inv-item" data-category="Дополнительные позиции">
@@ -1405,7 +1416,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div></div></details></section>
 <details class="inv-group"><summary><span>Инструменты</span><small>14 поз.</small></summary><div class="inv-list">
@@ -1415,7 +1426,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <label>Статус<select class="inv-status"><option value="">Выберите</option><option value="Есть">Есть</option><option value="Есть не всё">Есть не всё</option><option value="Нету">Нету</option></select></label><div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div><div class="inv-item" data-category="Инструменты">
 <div class="inv-name"><span class="small-num">102</span>Ножницы обычные</div>
@@ -1423,7 +1434,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <label>Статус<select class="inv-status"><option value="">Выберите</option><option value="Есть">Есть</option><option value="Есть не всё">Есть не всё</option><option value="Нету">Нету</option></select></label><div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div><div class="inv-item" data-category="Инструменты">
 <div class="inv-name"><span class="small-num">103</span>Ножницы для ваты</div>
@@ -1431,7 +1442,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <label>Статус<select class="inv-status"><option value="">Выберите</option><option value="Есть">Есть</option><option value="Есть не всё">Есть не всё</option><option value="Нету">Нету</option></select></label><div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div><div class="inv-item" data-category="Инструменты">
 <div class="inv-name"><span class="small-num">104</span>Пинцет для койлов</div>
@@ -1439,7 +1450,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <label>Статус<select class="inv-status"><option value="">Выберите</option><option value="Есть">Есть</option><option value="Есть не всё">Есть не всё</option><option value="Нету">Нету</option></select></label><div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div><div class="inv-item" data-category="Инструменты">
 <div class="inv-name"><span class="small-num">105</span>Пинцет для ваты</div>
@@ -1447,7 +1458,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <label>Статус<select class="inv-status"><option value="">Выберите</option><option value="Есть">Есть</option><option value="Есть не всё">Есть не всё</option><option value="Нету">Нету</option></select></label><div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div><div class="inv-item" data-category="Инструменты">
 <div class="inv-name"><span class="small-num">106</span>Койл-джиг — набор для намотки спиралей</div>
@@ -1455,7 +1466,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <label>Статус<select class="inv-status"><option value="">Выберите</option><option value="Есть">Есть</option><option value="Есть не всё">Есть не всё</option><option value="Нету">Нету</option></select></label><div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div><div class="inv-item" data-category="Инструменты">
 <div class="inv-name"><span class="small-num">107</span>Комплект насадок и отвёрток для ремонта и обслуживания</div>
@@ -1463,7 +1474,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <label>Статус<select class="inv-status"><option value="">Выберите</option><option value="Есть">Есть</option><option value="Есть не всё">Есть не всё</option><option value="Нету">Нету</option></select></label><div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div><div class="inv-item" data-category="Инструменты">
 <div class="inv-name"><span class="small-num">108</span>Бокорезы для спиралей</div>
@@ -1471,7 +1482,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <label>Статус<select class="inv-status"><option value="">Выберите</option><option value="Есть">Есть</option><option value="Есть не всё">Есть не всё</option><option value="Нету">Нету</option></select></label><div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div><div class="inv-item" data-category="Инструменты">
 <div class="inv-name"><span class="small-num">109</span>Спирали — количество и сопротивление</div>
@@ -1482,7 +1493,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 <div class="inv-item" data-category="Инструменты">
 <div class="inv-name"><span class="small-num">110</span>Попка — инструмент для обслуживания койлов</div>
@@ -1490,7 +1501,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <label>Статус<select class="inv-status"><option value="">Выберите</option><option value="Есть">Есть</option><option value="Есть не всё">Есть не всё</option><option value="Нету">Нету</option></select></label><div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div><div class="inv-item" data-category="Инструменты">
 <div class="inv-name"><span class="small-num">111</span>Щёточка для очистки койлов</div>
@@ -1498,7 +1509,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <label>Статус<select class="inv-status"><option value="">Выберите</option><option value="Есть">Есть</option><option value="Есть не всё">Есть не всё</option><option value="Нету">Нету</option></select></label><div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div><div class="inv-item" data-category="Инструменты">
 <div class="inv-name"><span class="small-num">112</span>Отвёртка крестовая</div>
@@ -1506,7 +1517,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <label>Статус<select class="inv-status"><option value="">Выберите</option><option value="Есть">Есть</option><option value="Есть не всё">Есть не всё</option><option value="Нету">Нету</option></select></label><div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div><div class="inv-item" data-category="Инструменты">
 <div class="inv-name"><span class="small-num">113</span>Отвёртка плоская</div>
@@ -1514,7 +1525,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <label>Статус<select class="inv-status"><option value="">Выберите</option><option value="Есть">Есть</option><option value="Есть не всё">Есть не всё</option><option value="Нету">Нету</option></select></label><div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div><div class="inv-item" data-category="Инструменты">
 <div class="inv-name"><span class="small-num">114</span>Оправка для койлов — стержень для установки и проверки спирали</div>
@@ -1522,31 +1533,145 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <label>Статус<select class="inv-status"><option value="">Выберите</option><option value="Есть">Есть</option><option value="Есть не всё">Есть не всё</option><option value="Нету">Нету</option></select></label><div class="inv-comments">
 <div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
-</div>
+<div class="photo-wrap"><label class="photo-btn"><span>📷 Сфотографировать</span><input accept="image/*" capture="environment" class="photo-input" multiple="" type="file"/></label><div class="photo-list"></div></div></div>
 </div>
 </div>
 </div></details><section class="card"><h2>Задачи по итогам проверки</h2><div class="fields task-row" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr) 130px 150px"><label>Задача<input class="task"/></label><label>Ответственный<input class="task"/></label><label>Срок<input class="task" type="date"/></label><label>Статус<select class="task"><option>—</option><option>Новая</option><option>В работе</option><option>Выполнено</option></select></label></div></section>
 <section class="card"><h2>Итоговый комментарий</h2><textarea id="finalComment" placeholder="Общий вывод по магазину"></textarea></section>
 
-<section class="card" id="autoSummary">
-  <h2>Итого: что нужно выполнить</h2>
-  <div class="summary-list" id="summaryList">
-    <div class="summary-empty">Здесь автоматически появятся все заполненные комментарии.</div>
+<section class="card" id="movementSection">
+  <h2>Перемещение</h2>
+
+  <div class="movement-list" id="movementList">
+    <div class="movement-row">
+      <div class="movement-route">
+        <div class="field">
+          <label>Откуда</label>
+          <select class="movement-from">
+            <option value="">Выберите магазин</option>
+            <option>Пушка</option>
+            <option>Холодка</option>
+            <option>Универ</option>
+            <option>Пролет</option>
+          </select>
+        </div>
+        <div class="movement-arrow">→</div>
+        <div class="field">
+          <label>Куда</label>
+          <select class="movement-to">
+            <option value="">Выберите магазин</option>
+            <option>Пушка</option>
+            <option>Холодка</option>
+            <option>Универ</option>
+            <option>Пролет</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="movement-items">
+        <label class="movement-items-label">Что нужно переместить</label>
+        <div class="movement-item">
+          <input type="text" class="movement-product" placeholder="Например: Флаконы 60 мл">
+          <input type="text" class="movement-qty" placeholder="Кол-во">
+          <button type="button" class="movement-remove" title="Удалить">×</button>
+        </div>
+      </div>
+
+      <div class="movement-actions">
+        <button type="button" class="movement-add-item">＋ Добавить позицию</button>
+      </div>
+    </div>
   </div>
+
+  <div class="movement-actions">
+    <button type="button" class="movement-add-route">＋ Добавить перемещение</button>
+  </div>
+</section>
+
+<section class="card" id="autoSummary">
+<h2>Итого: что нужно выполнить</h2>
+<div class="summary-list" id="summaryList">
+<div class="summary-empty">Здесь автоматически появятся все заполненные комментарии.</div>
+</div>
 </section>
 <section class="card"><div class="actions"><button class="action primary" id="excelBtn">Скачать Excel</button><button class="action secondary" id="printBtn">Печать / PDF</button><button class="action danger" id="resetBtn">Очистить</button></div><p class="note">Excel открывается в Microsoft Excel, Numbers и Google Таблицах.</p></section>
 </div>
-
 <style>
-#autoSummary .summary-empty{opacity:.65;font-size:13px}
-#autoSummary .summary-list{display:flex;flex-direction:column;gap:10px}
-#autoSummary .summary-item{padding:12px 14px;border:1px solid rgba(255,255,255,.10);border-radius:12px;background:rgba(255,255,255,.035)}
-#autoSummary .summary-source{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;opacity:.55;margin-bottom:4px}
-#autoSummary .summary-text{white-space:pre-wrap;overflow-wrap:anywhere}
+.photo-wrap{margin-top:10px}
+.photo-btn{
+  display:inline-flex;align-items:center;gap:7px;padding:9px 12px;
+  border:1px solid rgba(255,255,255,.14);border-radius:10px;
+  background:rgba(255,255,255,.045);color:inherit;cursor:pointer;
+  font-size:13px
+}
+.photo-btn input{display:none}
+.photo-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
+.photo-thumb{position:relative}
+.photo-thumb img{display:block;width:110px;height:85px;object-fit:cover;border-radius:9px;border:1px solid rgba(255,255,255,.12)}
+.photo-remove{position:absolute;right:3px;top:3px;width:22px;height:22px;border:0;border-radius:50%;background:rgba(0,0,0,.7);color:#fff;cursor:pointer}
+.summary-photo-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
+.summary-photo-list img{width:105px;height:80px;object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,.12)}
+@media print{
+  .photo-btn,.photo-remove{display:none!important}
+  .photo-thumb img,.summary-photo-list img{break-inside:avoid}
+  .photo-list,.summary-photo-list{display:flex!important}
+}
 </style>
+
+<style id="movementCSS">
+.movement-list{display:flex;flex-direction:column;gap:12px}
+.movement-row{padding:14px;border:1px solid rgba(255,255,255,.10);border-radius:12px;background:rgba(255,255,255,.025)}
+.movement-route{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:end}
+.movement-route .field{min-width:0}
+.movement-route label,.movement-items-label{display:block;font-size:12px;font-weight:700;opacity:.65;margin:0 0 6px}
+.movement-arrow{font-size:20px;opacity:.6;padding-bottom:9px}
+.movement-items{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.movement-item{display:grid;grid-template-columns:1fr 88px 36px;gap:8px;align-items:center}
+.movement-item input{width:100%;box-sizing:border-box}
+.movement-remove{width:36px;height:36px;border:1px solid rgba(255,255,255,.12);border-radius:9px;background:rgba(255,255,255,.04);color:inherit;cursor:pointer}
+.movement-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.movement-add-item,.movement-add-route{border:1px solid rgba(214,164,76,.45);border-radius:10px;background:rgba(214,164,76,.10);color:#e7c27d;padding:9px 12px;font-weight:700;cursor:pointer}
+@media(max-width:480px){
+  .movement-route{grid-template-columns:1fr}
+  .movement-arrow{display:none}
+}
+@media print{
+  .movement-add-item,.movement-add-route,.movement-remove{display:none!important}
+  .movement-row{break-inside:avoid}
+}
+</style>
+
 <script>
 (function () {
   "use strict";
+
+    document.addEventListener("change", function(event) {
+      var input = event.target;
+      if (!input || !input.classList || !input.classList.contains("photo-input")) return;
+      var wrap = input.closest(".photo-wrap");
+      var list = wrap ? wrap.querySelector(".photo-list") : null;
+      if (!list) return;
+      Array.from(input.files || []).forEach(function(file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var thumb = document.createElement("div");
+          thumb.className = "photo-thumb";
+          var img = document.createElement("img");
+          img.src = e.target.result;
+          var remove = document.createElement("button");
+          remove.type = "button";
+          remove.className = "photo-remove";
+          remove.textContent = "×";
+          remove.addEventListener("click", function() { thumb.remove(); updateSummary(); });
+          thumb.appendChild(img);
+          thumb.appendChild(remove);
+          list.appendChild(thumb);
+          updateSummary();
+        };
+        reader.readAsDataURL(file);
+      });
+      input.value = "";
+    }, false);
 
   function init() {
     var items = Array.prototype.slice.call(document.querySelectorAll(".check-item"));
@@ -1560,36 +1685,54 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
       }
       return 0;
     }
-
-
     function updateSummary() {
       var list = document.getElementById("summaryList");
       if (!list) return;
 
       var entries = [];
-      var commentInputs = document.querySelectorAll(".comment-input");
+      document.querySelectorAll(".check-item, .inv-item").forEach(function(item) {
+        var texts = [];
+        item.querySelectorAll(".comment-input").forEach(function(input) {
+          var v = (input.value || "").trim();
+          if (v) texts.push(v);
+        });
 
-      Array.prototype.forEach.call(commentInputs, function (input) {
-        var value = (input.value || "").trim();
-        if (!value) return;
+        var photos = [];
+        item.querySelectorAll(".photo-thumb img").forEach(function(img) {
+          photos.push(img.src);
+        });
 
-        var checkItem = input.closest(".check-item");
-        var invItem = input.closest(".inv-item");
-        var source = "";
+        if (!texts.length && !photos.length) return;
 
-        if (checkItem) {
-          var question = checkItem.querySelector(".question");
-          source = question ? question.textContent.trim() : "Пункт проверки";
-        } else if (invItem) {
-          var category = invItem.getAttribute("data-category") || "";
-          var name = invItem.querySelector(".inv-name");
-          var itemName = name ? name.textContent.replace(/^\s*\+?\s*/, "").trim() : "";
-          source = itemName || category || "Инвентарь";
-        } else {
-          source = "Комментарий";
-        }
+        var q = item.querySelector(".question");
+        var n = item.querySelector(".inv-name");
+        var source = q ? q.textContent.trim() : (n ? n.textContent.trim() : "Пункт");
 
-        entries.push({ source: source, text: value });
+        entries.push({source: source, text: texts.join("\n"), photos: photos});
+      });
+
+
+      document.querySelectorAll(".movement-row").forEach(function(row) {
+        var from = row.querySelector(".movement-from");
+        var to = row.querySelector(".movement-to");
+        var products = [];
+        row.querySelectorAll(".movement-item").forEach(function(item) {
+          var p = item.querySelector(".movement-product");
+          var q = item.querySelector(".movement-qty");
+          var pv = p ? p.value.trim() : "";
+          var qv = q ? q.value.trim() : "";
+          if (pv || qv) products.push((pv || "Позиция") + (qv ? " — " + qv : ""));
+        });
+
+        var fromV = from ? from.value : "";
+        var toV = to ? to.value : "";
+        if (!fromV && !toV && !products.length) return;
+
+        entries.push({
+          source: "Перемещение" + (fromV || toV ? " — " + (fromV || "не указано") + " → " + (toV || "не указано") : ""),
+          text: products.join("\n"),
+          photos: []
+        });
       });
 
       list.innerHTML = "";
@@ -1597,28 +1740,115 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
       if (!entries.length) {
         var empty = document.createElement("div");
         empty.className = "summary-empty";
-        empty.textContent = "Здесь автоматически появятся все заполненные комментарии.";
+        empty.textContent = "Здесь автоматически появятся все заполненные комментарии и фотографии.";
         list.appendChild(empty);
         return;
       }
 
-      entries.forEach(function (entry) {
-        var item = document.createElement("div");
-        item.className = "summary-item";
+      entries.forEach(function(entry) {
+        var box = document.createElement("div");
+        box.className = "summary-item";
 
-        var source = document.createElement("span");
-        source.className = "summary-source";
-        source.textContent = entry.source;
+        var title = document.createElement("span");
+        title.className = "summary-source";
+        title.textContent = entry.source;
+        box.appendChild(title);
 
-        var text = document.createElement("div");
-        text.className = "summary-text";
-        text.textContent = entry.text;
+        if (entry.text) {
+          var text = document.createElement("div");
+          text.className = "summary-text";
+          text.textContent = entry.text;
+          box.appendChild(text);
+        }
 
-        item.appendChild(source);
-        item.appendChild(text);
-        list.appendChild(item);
+        if (entry.photos.length) {
+          var photos = document.createElement("div");
+          photos.className = "summary-photo-list";
+          entry.photos.forEach(function(src) {
+            var img = document.createElement("img");
+            img.src = src;
+            photos.appendChild(img);
+          });
+          box.appendChild(photos);
+        }
+
+        list.appendChild(box);
       });
     }
+
+
+    document.addEventListener("input", function(event) {
+      if (event.target && event.target.classList && event.target.classList.contains("comment-input")) {
+        updateSummary();
+      }
+    }, false);
+    var photoSummaryInputListener = true;
+
+
+    function movementItemHtml() {
+      return '<div class="movement-item">' +
+        '<input type="text" class="movement-product" placeholder="Например: Флаконы 60 мл">' +
+        '<input type="text" class="movement-qty" placeholder="Кол-во">' +
+        '<button type="button" class="movement-remove" title="Удалить">×</button>' +
+      '</div>';
+    }
+
+    document.addEventListener("click", function(event) {
+      var addItem = event.target.closest && event.target.closest(".movement-add-item");
+      if (addItem) {
+        var row = addItem.closest(".movement-row");
+        var items = row.querySelector(".movement-items");
+        var div = document.createElement("div");
+        div.innerHTML = movementItemHtml();
+        items.appendChild(div.firstElementChild);
+        return;
+      }
+
+      var remove = event.target.closest && event.target.closest(".movement-remove");
+      if (remove) {
+        var row = remove.closest(".movement-row");
+        var all = row.querySelectorAll(".movement-item");
+        if (all.length > 1) remove.closest(".movement-item").remove();
+        else {
+          var p = row.querySelector(".movement-product");
+          var q = row.querySelector(".movement-qty");
+          if (p) p.value = "";
+          if (q) q.value = "";
+        }
+        updateSummary();
+        return;
+      }
+
+      var addRoute = event.target.closest && event.target.closest(".movement-add-route");
+      if (addRoute) {
+        var list = document.getElementById("movementList");
+        var base = list.querySelector(".movement-row");
+        var clone = base.cloneNode(true);
+        clone.querySelectorAll("input").forEach(function(input){ input.value = ""; });
+        clone.querySelectorAll("select").forEach(function(select){ select.selectedIndex = 0; });
+        var itemList = clone.querySelector(".movement-items");
+        itemList.querySelectorAll(".movement-item").forEach(function(item, index){
+          if (index > 0) item.remove();
+          else item.querySelectorAll("input").forEach(function(input){ input.value = ""; });
+        });
+        list.appendChild(clone);
+        return;
+      }
+    }, false);
+
+    document.addEventListener("input", function(event) {
+      if (event.target && (
+        event.target.classList.contains("movement-product") ||
+        event.target.classList.contains("movement-qty")
+      )) updateSummary();
+    }, false);
+
+    document.addEventListener("change", function(event) {
+      if (event.target && (
+        event.target.classList.contains("movement-from") ||
+        event.target.classList.contains("movement-to")
+      )) updateSummary();
+    }, false);
 
     function recalculate() {
       var total = 0;
@@ -1657,15 +1887,7 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
       select.addEventListener("change", recalculate, false);
       select.addEventListener("input", recalculate, false);
     });
-
-
-    document.addEventListener("input", function (event) {
-      if (event.target && event.target.classList && event.target.classList.contains("comment-input")) {
-        updateSummary();
-      }
-    }, false);
-
-    document.addEventListener("click", function (event) {
+document.addEventListener("click", function (event) {
       var button = event.target.closest ? event.target.closest(".add-comment") : null;
       if (!button) return;
 
@@ -1774,9 +1996,15 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
         list.innerHTML = "";
         if (first) { first.value = ""; first.placeholder = "Комментарий 1"; list.appendChild(first); }
       });
-      recalculate();
+      document.querySelectorAll(".photo-list").forEach(function (list) {
+        list.innerHTML = "";
+      });
+      updateSummary();
+      updateSummary();
+    recalculate();
     }, false);
 
+    updateSummary();
     recalculate();
   }
 
