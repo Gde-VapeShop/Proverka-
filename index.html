@@ -1101,6 +1101,24 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 <div class="comment-list"><input class="comment-input" placeholder="Комментарий 1" type="text"/></div>
 </div>
 </div>
+</div></div></details><details class="inv-group" open=""><summary><span>Необходимые ароматизаторы</span><small>список</small></summary><div class="inv-list">
+<div class="inv-item" data-category="Необходимые ароматизаторы">
+<div class="inv-name"><span class="small-num">+</span>Ароматизатор и фирма</div>
+<div class="inv-fields">
+<div class="inv-comments">
+<div class="comment-line"><label>Список ароматизаторов</label><button class="add-comment" type="button">＋ Добавить</button></div>
+<div class="comment-list"><input class="comment-input" placeholder="Ароматизатор — фирма" type="text"/></div>
+</div>
+</div>
+</div></div></details><details class="inv-group" open=""><summary><span>Размен</span><small>комментарии</small></summary><div class="inv-list">
+<div class="inv-item" data-category="Размен">
+<div class="inv-name"><span class="small-num">+</span>Размен</div>
+<div class="inv-fields">
+<div class="inv-comments">
+<div class="comment-line"><label>Комментарий</label><button class="add-comment" type="button">＋ Добавить</button></div>
+<div class="comment-list"><input class="comment-input" placeholder="Напишите, что нужно по размену и прочему" type="text"/></div>
+</div>
+</div>
 </div></div></details><details class="inv-group"><summary><span>Шприцы — объем и количество</span><small>4 поз.</small></summary><div class="inv-list">
 <div class="inv-item" data-category="Шприцы — объем и количество">
 <div class="inv-name"><span class="small-num">11</span>Шприцы 1 мл — количество</div>
@@ -1509,8 +1527,23 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 </div>
 </div></details><section class="card"><h2>Задачи по итогам проверки</h2><div class="fields task-row" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr) 130px 150px"><label>Задача<input class="task"/></label><label>Ответственный<input class="task"/></label><label>Срок<input class="task" type="date"/></label><label>Статус<select class="task"><option>—</option><option>Новая</option><option>В работе</option><option>Выполнено</option></select></label></div></section>
 <section class="card"><h2>Итоговый комментарий</h2><textarea id="finalComment" placeholder="Общий вывод по магазину"></textarea></section>
+
+<section class="card" id="autoSummary">
+  <h2>Итого: что нужно выполнить</h2>
+  <div class="summary-list" id="summaryList">
+    <div class="summary-empty">Здесь автоматически появятся все заполненные комментарии.</div>
+  </div>
+</section>
 <section class="card"><div class="actions"><button class="action primary" id="excelBtn">Скачать Excel</button><button class="action secondary" id="printBtn">Печать / PDF</button><button class="action danger" id="resetBtn">Очистить</button></div><p class="note">Excel открывается в Microsoft Excel, Numbers и Google Таблицах.</p></section>
 </div>
+
+<style>
+#autoSummary .summary-empty{opacity:.65;font-size:13px}
+#autoSummary .summary-list{display:flex;flex-direction:column;gap:10px}
+#autoSummary .summary-item{padding:12px 14px;border:1px solid rgba(255,255,255,.10);border-radius:12px;background:rgba(255,255,255,.035)}
+#autoSummary .summary-source{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;opacity:.55;margin-bottom:4px}
+#autoSummary .summary-text{white-space:pre-wrap;overflow-wrap:anywhere}
+</style>
 <script>
 (function () {
   "use strict";
@@ -1526,6 +1559,65 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
         return Number(option.dataset.points) || 0;
       }
       return 0;
+    }
+
+
+    function updateSummary() {
+      var list = document.getElementById("summaryList");
+      if (!list) return;
+
+      var entries = [];
+      var commentInputs = document.querySelectorAll(".comment-input");
+
+      Array.prototype.forEach.call(commentInputs, function (input) {
+        var value = (input.value || "").trim();
+        if (!value) return;
+
+        var checkItem = input.closest(".check-item");
+        var invItem = input.closest(".inv-item");
+        var source = "";
+
+        if (checkItem) {
+          var question = checkItem.querySelector(".question");
+          source = question ? question.textContent.trim() : "Пункт проверки";
+        } else if (invItem) {
+          var category = invItem.getAttribute("data-category") || "";
+          var name = invItem.querySelector(".inv-name");
+          var itemName = name ? name.textContent.replace(/^\s*\+?\s*/, "").trim() : "";
+          source = itemName || category || "Инвентарь";
+        } else {
+          source = "Комментарий";
+        }
+
+        entries.push({ source: source, text: value });
+      });
+
+      list.innerHTML = "";
+
+      if (!entries.length) {
+        var empty = document.createElement("div");
+        empty.className = "summary-empty";
+        empty.textContent = "Здесь автоматически появятся все заполненные комментарии.";
+        list.appendChild(empty);
+        return;
+      }
+
+      entries.forEach(function (entry) {
+        var item = document.createElement("div");
+        item.className = "summary-item";
+
+        var source = document.createElement("span");
+        source.className = "summary-source";
+        source.textContent = entry.source;
+
+        var text = document.createElement("div");
+        text.className = "summary-text";
+        text.textContent = entry.text;
+
+        item.appendChild(source);
+        item.appendChild(text);
+        list.appendChild(item);
+      });
     }
 
     function recalculate() {
@@ -1565,6 +1657,13 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
       select.addEventListener("change", recalculate, false);
       select.addEventListener("input", recalculate, false);
     });
+
+
+    document.addEventListener("input", function (event) {
+      if (event.target && event.target.classList && event.target.classList.contains("comment-input")) {
+        updateSummary();
+      }
+    }, false);
 
     document.addEventListener("click", function (event) {
       var button = event.target.closest ? event.target.closest(".add-comment") : null;
