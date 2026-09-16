@@ -1766,6 +1766,33 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
     }
 
 
+
+    // Update the bottom "Итого" live whenever any comment, movement or other
+    // relevant field changes.
+    document.addEventListener("input", function(event) {
+      var el = event.target;
+      if (!el) return;
+      if (
+        el.classList.contains("comment-input") ||
+        el.classList.contains("movement-product") ||
+        el.classList.contains("movement-qty")
+      ) {
+        updateSummary();
+      }
+    }, false);
+
+    document.addEventListener("change", function(event) {
+      var el = event.target;
+      if (!el) return;
+      if (
+        el.classList.contains("movement-from") ||
+        el.classList.contains("movement-to") ||
+        el.classList.contains("photo-input")
+      ) {
+        updateSummary();
+      }
+    }, false);
+
     function recalculate() {
       var total = 0;
       var maximum = 0;
