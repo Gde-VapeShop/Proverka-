@@ -1641,6 +1641,75 @@ button.action{box-shadow:0 7px 18px rgba(0,0,0,.22);}
 }
 </style>
 
+
+<style id="summaryCardsCSS">
+#autoSummary .summary-list{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin-top:14px;
+}
+#autoSummary .summary-item{
+  display:block;
+  width:100%;
+  box-sizing:border-box;
+  padding:18px 16px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;
+  background:rgba(255,255,255,.035);
+  box-shadow:0 3px 14px rgba(0,0,0,.12);
+}
+#autoSummary .summary-source{
+  display:block;
+  margin-bottom:8px;
+  font-size:12px;
+  line-height:1.35;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.48);
+}
+#autoSummary .summary-text{
+  font-size:17px;
+  line-height:1.45;
+  color:inherit;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+#autoSummary .summary-photo-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:12px;
+}
+#autoSummary .summary-photo-list img{
+  display:block;
+  width:112px;
+  height:88px;
+  object-fit:cover;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.14);
+}
+#autoSummary .summary-empty{
+  padding:14px 16px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  background:rgba(255,255,255,.025);
+  opacity:.65;
+}
+@media print{
+  #autoSummary .summary-list{gap:12px}
+  #autoSummary .summary-item{
+    break-inside:avoid;
+    page-break-inside:avoid;
+    border:1px solid #bbb;
+    background:#fff;
+    color:#111;
+  }
+  #autoSummary .summary-source{color:#666}
+}
+</style>
+
 <script>
 (function () {
   "use strict";
