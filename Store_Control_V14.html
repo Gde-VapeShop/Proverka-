@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0908">
+<title>GDE — Контроль магазина</title>
+<style>
+:root{
+ --bg:#07090d;--panel:#0f1218;--panel2:#141923;--panel3:#1a202c;
+ --text:#f5f7fb;--muted:#858e9e;--line:#252c38;
+ --accent:#6ea8ff;--accent2:#202c42;--accent3:#9a7cff;
+ --ok:#4ed99a;--warn:#ffca63;--bad:#ff6278;
+ --shadow:0 18px 55px rgba(0,0,0,.38)
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:
+ radial-gradient(600px 360px at 100% 0%,rgba(110,168,255,.10),transparent 62%),
+ radial-gradient(500px 400px at 0% 22%,rgba(154,124,255,.07),transparent 65%),
+ var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.top{position:sticky;top:0;z-index:100;padding:12px 14px 10px;background:rgba(7,9,13,.86);backdrop-filter:blur(22px);border-bottom:1px solid rgba(255,255,255,.055)}
+.topin{max-width:920px;margin:auto;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:950;letter-spacing:.10em;font-size:14px}.logo span{color:var(--accent)}.save{font-size:10px;color:var(--ok);font-weight:900}
+.app{max-width:920px;margin:auto;padding:16px 14px 112px}.tab{display:none}.tab.active{display:block;animation:appear .16s ease}
+@keyframes appear{from{opacity:.15;transform:translateY(5px)}to{opacity:1;transform:none}}
+.hero{border:1px solid var(--line);border-radius:27px;background:linear-gradient(145deg,#151a23,#0e1117);padding:22px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-95px;top:-115px;width:270px;height:270px;border-radius:50%;background:radial-gradient(circle,rgba(110,168,255,.14),transparent 68%)}
+.kicker{font-size:9px;letter-spacing:.17em;text-transform:uppercase;color:var(--accent);font-weight:950}
+h1{font-size:30px;line-height:1.03;letter-spacing:-.045em;margin:8px 0 7px}h2{font-size:20px;letter-spacing:-.02em;margin:0}.sub{color:var(--muted);font-size:12px;line-height:1.45}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:20px}.cap{font-size:9px;text-transform:uppercase;letter-spacing:.13em;font-weight:950;color:#737d8c;margin:0 0 6px 2px;display:block}
+input,select,textarea{width:100%;border:1px solid #2a313d;background:#0a0d12;color:var(--text);border-radius:13px;padding:12px 13px;outline:none;min-height:46px}
+input:focus,select:focus,textarea:focus{border-color:rgba(110,168,255,.65);box-shadow:0 0 0 3px rgba(110,168,255,.08)}textarea{min-height:84px;resize:vertical}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.stat{border:1px solid #242b36;background:#0a0d12;border-radius:16px;padding:11px}.stat strong{display:block;font-size:20px;letter-spacing:-.04em}.stat small{color:var(--muted);font-size:10px}.bar{height:5px;background:#242b36;border-radius:20px;margin-top:13px;overflow:hidden}.bar i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent3))}
+.section{margin-top:15px}.category{border:1px solid var(--line);border-radius:20px;background:rgba(15,18,24,.97);margin-bottom:10px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.14)}
+.category summary{cursor:pointer;list-style:none;padding:16px;display:flex;justify-content:space-between;align-items:center;font-weight:950}.category summary::-webkit-details-marker{display:none}.catname{display:flex;gap:10px;align-items:center}.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 13px rgba(110,168,255,.55)}.count{color:var(--muted);font-size:10px;font-weight:850}.categoryBody{padding:0 15px 8px}
+.check{padding:15px 1px;border-top:1px solid #232a35}.check:first-child{border-top:0}.question{font-size:14px;font-weight:850;line-height:1.36}
+.statuses{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}.statuses label{position:relative}.statuses input{position:absolute;opacity:0;width:1px;height:1px}
+.statuses span{display:block;text-align:center;padding:10px 3px;border:1px solid #2a313d;border-radius:11px;color:#788292;font-size:10px;font-weight:950;background:#0a0d12}
+.statuses input[data-state=ok]:checked+span{color:var(--ok);border-color:rgba(78,217,154,.55);background:rgba(78,217,154,.08)}
+.statuses input[data-state=issue]:checked+span{color:var(--warn);border-color:rgba(255,202,99,.55);background:rgba(255,202,99,.08)}
+.statuses input[data-state=bad]:checked+span{color:var(--bad);border-color:rgba(255,98,120,.55);background:rgba(255,98,120,.08)}
+.statuses input[data-state=na]:checked+span{color:#c1c8d2;border-color:#566170;background:#1b2029}
+.problem{display:none;margin-top:9px;padding:10px;border:1px solid #252d39;border-radius:14px;background:#0a0d12}.check.problemOn .problem{display:block}
+.problemTitle{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#727c8b;font-weight:950;margin-bottom:7px}
+.problem textarea{min-height:66px}.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.chip{border:1px solid #2a313d;background:#121720;color:#98a1af;border-radius:99px;padding:6px 9px;font-size:9px;font-weight:900}
+.sectionHead{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:0 2px 10px}.card{border:1px solid var(--line);border-radius:20px;background:rgba(15,18,24,.97);padding:15px;margin-bottom:10px}
+.btn{border:1px solid #2b323e;background:#0a0d12;color:var(--text);border-radius:11px;padding:10px 12px;font-weight:900;font-size:11px}.btn.primary{background:var(--accent);border-color:var(--accent);color:#07101e}.btn.red{color:var(--bad)}.btn.icon{width:40px;padding:10px 0;text-align:center}
+.row{display:grid;grid-template-columns:1fr 82px 40px;gap:6px}.row2{display:grid;grid-template-columns:1fr 1fr;gap:7px}.rows{display:grid;gap:7px}.empty{padding:18px 4px;color:var(--muted);font-size:12px;text-align:center;border:1px dashed #2a313d;border-radius:14px}
+.task{border:1px solid #292f3a;background:#0a0d12;border-radius:14px;padding:12px;margin-top:7px}.taskTop{display:flex;justify-content:space-between;gap:8px}.badge{font-size:8px;font-weight:950;padding:5px 7px;border-radius:99px}.badge.warn{color:var(--warn);background:rgba(255,202,99,.09)}.badge.bad{color:var(--bad);background:rgba(255,98,120,.09)}.task b{font-size:12px}.task p{margin:7px 0 0;color:#adb5c1;font-size:11px;line-height:1.4}
+.reportOptions{display:grid;grid-template-columns:1fr 1fr;gap:7px}.checkOpt{display:flex;align-items:center;gap:9px;border:1px solid #29303b;background:#0a0d12;padding:12px;border-radius:13px;font-size:11px;font-weight:850}.checkOpt input{width:auto;min-height:0}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.bottom{position:fixed;z-index:110;left:50%;bottom:max(9px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(760px,calc(100% - 18px));background:rgba(15,18,24,.96);backdrop-filter:blur(22px);border:1px solid #2b323e;border-radius:21px;padding:5px;box-shadow:0 18px 55px rgba(0,0,0,.62)}
+.bottomGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}.navBtn{border:0;background:transparent;color:#737d8c;border-radius:15px;height:56px;padding:5px 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-weight:900}.navIcon{font-size:17px;line-height:1}.navLabel{font-size:9px;white-space:nowrap}.navBtn.active{background:#1c2940;color:var(--accent)}
+.pdf-stage{position:fixed;left:-10000px;top:0;width:794px;background:#fff;color:#172033}.pdf-page{width:794px;min-height:1123px;padding:55px 58px;background:#fff;position:relative}.pdf-page h2{font-size:22px;margin:10px 0 18px}.pdf-kicker{color:#3559e0;font-size:11px;font-weight:950;letter-spacing:.12em}.pdf-meta{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:20px 0}.pdf-box{background:#f4f6fa;border-radius:13px;padding:12px}.pdf-table{width:100%;border-collapse:collapse;font-size:11px}.pdf-table th,.pdf-table td{padding:8px 6px;border-bottom:1px solid #e3e6eb;text-align:left;vertical-align:top}.pdf-table th{font-size:9px;color:#737b89;text-transform:uppercase}.pdf-footer{position:absolute;bottom:28px;left:58px;right:58px;border-top:1px solid #e3e6eb;padding-top:8px;font-size:9px;color:#8a919d}
+@media(max-width:650px){.meta{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.reportOptions{grid-template-columns:1fr}}@media(max-width:390px){.app{padding-left:9px;padding-right:9px}.hero{padding:17px}.statuses span{font-size:9px}.navLabel{font-size:8px}}
+
+/* V8 — warm graphite / amber premium */
+:root{--bg:#0b0b0a;--panel:#151412;--panel2:#1b1916;--panel3:#24211c;--text:#f6f1e8;--muted:#9b9387;--line:#302c26;--accent:#d7a85c;--accent2:#3a2d1c;--accent3:#7f6a4b;--ok:#65c69a;--warn:#e7b65e;--bad:#e87568;--shadow:0 20px 60px rgba(0,0,0,.45)}
+body{background:radial-gradient(700px 400px at 100% 0%,rgba(215,168,92,.10),transparent 62%),radial-gradient(550px 420px at 0% 25%,rgba(127,106,75,.09),transparent 65%),var(--bg)}
+.top{background:rgba(11,11,10,.88);border-bottom-color:rgba(215,168,92,.12)}
+.logo span,.kicker{color:var(--accent)}
+.hero{background:linear-gradient(145deg,#1c1915,#11100e);border-color:#393229}
+.hero:after{background:radial-gradient(circle,rgba(215,168,92,.16),transparent 68%)}
+input,select,textarea{background:#0f0e0c;border-color:#38332b;color:#f6f1e8}
+input:focus,select:focus,textarea:focus{border-color:rgba(215,168,92,.7);box-shadow:0 0 0 3px rgba(215,168,92,.09)}
+.category,.card{background:rgba(21,20,18,.98);border-color:#332f29}
+.category summary{background:linear-gradient(180deg,rgba(255,255,255,.015),transparent)}
+.dot{background:var(--accent);box-shadow:0 0 13px rgba(215,168,92,.42)}
+.statuses span{background:#100f0d;border-color:#39342d}
+.statuses input[data-state=ok]:checked+span{background:rgba(101,198,154,.08)}
+.statuses input[data-state=issue]:checked+span{background:rgba(231,182,94,.09)}
+.statuses input[data-state=bad]:checked+span{background:rgba(232,117,104,.09)}
+.statuses input[data-state=na]:checked+span{background:#25221e}
+.chip{background:#1a1713;border-color:#39332a;color:#b9ad9c}
+.btn{background:#100f0d;border-color:#3a342b}.btn.primary{background:var(--accent);border-color:var(--accent);color:#1a1309}
+.stat{background:#100f0d;border-color:#312d27}.bar{background:#2b2822}.bar i{background:linear-gradient(90deg,#b8873d,#e5bc72)}
+.bottom{background:rgba(20,19,17,.96);border-color:#3a342b}.navBtn.active{background:#2c2418;color:var(--accent)}
+.reportPreview{display:grid;gap:10px}.reportGroup{border:1px solid #39342b;background:#11100e;border-radius:18px;overflow:hidden}.reportGroupHead{padding:14px 15px;border-bottom:1px solid #2c2924;display:flex;justify-content:space-between;align-items:center;gap:10px}.reportGroupHead b{font-size:13px}.reportGroupHead span{font-size:9px;color:var(--muted);font-weight:900}.reportPoint{padding:12px 15px;border-bottom:1px solid #24211d}.reportPoint:last-child{border-bottom:0}.reportPointTop{display:flex;gap:9px;align-items:flex-start}.reportNum{min-width:24px;height:24px;border-radius:8px;background:#292116;color:var(--accent);display:grid;place-items:center;font-size:9px;font-weight:950}.reportPoint b{font-size:11px;line-height:1.35}.reportStatus{font-size:8px;font-weight:950;letter-spacing:.06em;margin-top:4px}.rs-ok{color:var(--ok)}.rs-issue{color:var(--warn)}.rs-bad{color:var(--bad)}.reportComment{margin:8px 0 0 33px;color:#b7afa4;font-size:10px;line-height:1.45}.reportMove{padding:12px 15px;border-bottom:1px solid #24211d}.reportMove:last-child{border-bottom:0}.moveRoute{font-size:10px;color:var(--muted);margin-bottom:7px}.moveItemLine{display:flex;justify-content:space-between;gap:8px;padding:5px 0;font-size:11px}.moveItemLine span:last-child{color:var(--accent);font-weight:950}.reportEmpty{padding:18px;text-align:center;color:var(--muted);font-size:11px}
+.pdf-page{background:#0b0d0f;color:#f2efe8;border:1px solid #25231f}.pdf-page:before{content:"";position:absolute;inset:0;background:radial-gradient(520px 380px at 100% 0%,rgba(216,192,138,.12),transparent 68%);pointer-events:none}.pdf-kicker{color:#d8c08a;font-size:10px;letter-spacing:.22em;text-transform:uppercase}.pdf-page h2{font-size:26px;font-weight:500;letter-spacing:-.045em;margin:12px 0 20px}.pdf-meta{gap:10px;margin:20px 0}.pdf-box{background:#121416;border:1px solid #292b2c;color:#f0ede6;border-radius:14px;padding:13px}.pdf-box b{color:#8f928f;font-size:8px;text-transform:uppercase;letter-spacing:.16em}.pdf-section{margin:20px 0 11px;padding:11px 13px;background:#181611;border:1px solid #3a3020;border-radius:11px;font-size:11px;font-weight:900;color:#d8c08a;text-transform:uppercase;letter-spacing:.14em}.pdf-point{border-bottom:1px solid #242729;padding:11px 4px}.pdf-point:last-child{border-bottom:0}.pdf-point-num{display:inline-block;width:25px;font-weight:900;color:#d8c08a}.pdf-point-title{font-weight:750;font-size:11px;color:#f0ede6}.pdf-point-status{display:inline-block;margin-left:8px;font-size:8px;font-weight:900;letter-spacing:.08em}.pdf-point-comment{margin:5px 0 0 25px;color:#9da19f;font-size:9px;line-height:1.45}.pdf-move{padding:12px 4px;border-bottom:1px solid #242729}.pdf-move:last-child{border-bottom:0}.pdf-move-route{font-weight:900;font-size:11px;margin-bottom:7px;color:#e6d2a6}.pdf-move-item{display:flex;justify-content:space-between;font-size:10px;padding:4px 0;color:#d2d4d1}.pdf-move-item span:last-child{font-weight:900;color:#d8c08a}.pdf-footer{border-color:#2a2d2e;color:#777c7c}
+
+/* V9 — SIGNATURE / OBISIDIAN LUXURY */
+:root{
+ --bg:#080807;--panel:#11100e;--panel2:#171511;--panel3:#211d17;
+ --text:#f8f2e7;--muted:#9a9184;--line:#302a22;
+ --accent:#d8ad68;--accent2:#3a2b19;--accent3:#9b7b4b;
+ --ok:#72c99f;--warn:#e5b65e;--bad:#e67868;
+ --shadow:0 26px 80px rgba(0,0,0,.58)
+}
+html{background:#080807}
+body{min-height:100vh;background:
+ radial-gradient(900px 520px at 50% -180px,rgba(216,173,104,.13),transparent 65%),
+ radial-gradient(650px 500px at -10% 45%,rgba(122,92,47,.08),transparent 68%),
+ radial-gradient(700px 500px at 110% 70%,rgba(94,70,39,.07),transparent 70%),#080807}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:linear-gradient(rgba(255,255,255,.8) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.8) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+.top{padding:14px 15px 11px;background:rgba(8,8,7,.78);backdrop-filter:blur(26px) saturate(130%);border-bottom:1px solid rgba(216,173,104,.13)}
+.topin{max-width:980px}.logo{font-size:12px;letter-spacing:.20em;color:#ddd3c4}.logo span{color:var(--accent)}.save{padding:6px 9px;border:1px solid rgba(114,201,159,.18);background:rgba(114,201,159,.055);border-radius:99px;font-size:8px;letter-spacing:.08em}
+.app{max-width:980px;padding:20px 15px 124px}.tab.active{animation:signatureIn .28s cubic-bezier(.2,.7,.2,1)}
+@keyframes signatureIn{from{opacity:0;transform:translateY(10px) scale(.995)}to{opacity:1;transform:none}}
+.hero{padding:25px;border-radius:30px;border:1px solid rgba(216,173,104,.22);background:linear-gradient(145deg,rgba(31,27,21,.98),rgba(13,12,10,.98));box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.045);overflow:hidden}
+.hero:before{content:"";position:absolute;inset:1px;border-radius:29px;border:1px solid rgba(255,255,255,.025);pointer-events:none}
+.hero:after{right:-125px;top:-155px;width:360px;height:360px;background:radial-gradient(circle,rgba(216,173,104,.18),rgba(216,173,104,.035) 30%,transparent 67%)}
+.heroTop{display:flex;align-items:center;gap:11px;position:relative;z-index:1}.brandMark{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(145deg,#e6c17d,#a87935);box-shadow:0 7px 24px rgba(216,173,104,.18),inset 0 1px 0 rgba(255,255,255,.38);color:#1b1309;font-weight:1000;font-size:17px;font-family:Georgia,serif}.brandMark span{transform:translateY(-1px)}
+.heroMini{font-size:7px;letter-spacing:.18em;color:#766d60;font-weight:900;margin-top:3px}.heroStatus{margin-left:auto;align-self:flex-start;font-size:7px;letter-spacing:.14em;color:#8d8375;font-weight:950;border:1px solid #3b3328;border-radius:99px;padding:6px 8px}.heroStatus span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--ok);box-shadow:0 0 9px rgba(114,201,159,.8);margin-right:4px}
+h1{font-size:34px;letter-spacing:-.055em;margin:18px 0 7px;max-width:520px}.sub{max-width:580px;color:#aaa092}.meta{margin-top:24px}.field{position:relative}.field:focus-within .cap{color:var(--accent)}
+input,select,textarea{border-radius:15px;background:rgba(8,8,7,.72);border-color:#3a3329;box-shadow:inset 0 1px 0 rgba(255,255,255,.025)}
+.stats{gap:8px;margin-top:16px}.stat{position:relative;overflow:hidden;border-radius:17px;padding:13px 12px;background:linear-gradient(145deg,#17140f,#0d0c0a);border-color:#373026}.stat:after{content:"";position:absolute;right:-22px;bottom:-32px;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle,rgba(216,173,104,.12),transparent 70%)}.stat strong{font-size:22px;position:relative;z-index:1}.stat small{letter-spacing:.08em;text-transform:uppercase;font-size:8px}.bar{height:6px;background:#2b261f;border:1px solid #3b3328;padding:1px;margin-top:14px}.bar i{border-radius:99px;background:linear-gradient(90deg,#8f642c,#e4bd78,#fff0c5);box-shadow:0 0 16px rgba(216,173,104,.22)}
+.section{margin-top:18px}.category,.card{border-radius:22px;background:linear-gradient(145deg,rgba(20,18,15,.98),rgba(13,12,10,.98));border-color:#332d25;box-shadow:0 10px 34px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.022)}
+.category summary{padding:18px 17px}.catname{font-size:13px;letter-spacing:-.01em}.dot{width:7px;height:7px;background:var(--accent);box-shadow:0 0 15px rgba(216,173,104,.65)}.count{padding:5px 8px;border:1px solid #3a3329;border-radius:99px;background:#12100d;color:#a99e8d}.categoryBody{padding:0 17px 9px}
+.check{padding:17px 1px;border-color:#29251f}.question{font-size:14px}.statuses{gap:7px;margin-top:11px}.statuses span{min-height:42px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:#0e0d0b;border-color:#383128;transition:.18s}.statuses label:active span{transform:scale(.97)}
+.problem{background:#0d0c0a;border-color:#393127;border-radius:15px}.chip{background:#18140f;border-color:#393126;transition:.15s}.chip:active{transform:scale(.97);border-color:#9f773f;color:#ead1a4}
+.sectionHead{margin-bottom:12px}.sectionHead .kicker{font-size:8px}.sectionHead h2{font-size:23px;letter-spacing:-.04em}.btn{border-radius:13px;background:#11100d;border-color:#3b3329;box-shadow:inset 0 1px 0 rgba(255,255,255,.025)}.btn.primary{background:linear-gradient(145deg,#e2ba76,#bd8a43);border-color:#d4a45d;box-shadow:0 8px 24px rgba(177,124,51,.16),inset 0 1px 0 rgba(255,255,255,.35)}
+.task{border-color:#332d25;background:#0f0e0c;border-radius:15px}.badge{letter-spacing:.08em}.empty{border-color:#393127;background:rgba(255,255,255,.012);border-radius:16px}
+.reportOptions{gap:8px}.checkOpt{background:#0e0d0b;border-color:#373027;border-radius:14px}.actions .btn{min-height:43px}
+.bottom{width:min(780px,calc(100% - 18px));bottom:max(10px,env(safe-area-inset-bottom));background:rgba(16,14,11,.82);backdrop-filter:blur(30px) saturate(130%);border:1px solid rgba(216,173,104,.20);border-radius:23px;box-shadow:0 22px 70px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.045);padding:5px}.navBtn{height:58px;border-radius:17px;transition:.2s}.navBtn.active{background:linear-gradient(145deg,#302417,#211a12);color:#e0b46d;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}.navIcon{font-size:16px}.navLabel{font-size:8px;letter-spacing:.04em}
+.reportGroup{border-color:#3a3228;background:linear-gradient(145deg,#15130f,#0e0d0b);border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.16)}.reportGroupHead{padding:15px 16px;border-color:#2b261f}.reportGroupHead b{font-size:12px;letter-spacing:.02em}.reportNum{background:#2a2116;border:1px solid #463725}.reportPoint{padding:13px 16px;border-color:#27221c}.reportComment{color:#b9ad9c}
+@media(max-width:650px){.hero{padding:21px}.heroStatus{font-size:6px;padding:5px 7px}.brandMark{width:35px;height:35px}.stats{grid-template-columns:repeat(2,1fr)}h1{font-size:30px}.category summary{padding:16px}.categoryBody{padding:0 15px 8px}}
+
+
+
+/* V12 — NOIR EXECUTIVE */
+:root{--bg:#070809;--panel:#0d0f12;--text:#f5f5f2;--muted:#8b9098;--line:rgba(255,255,255,.085);--accent:#d8c08a;--ok:#69d3a0;--warn:#e8bc65;--bad:#ed786f}
+html,body{background:#070809!important}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;color:var(--text);background:radial-gradient(900px 600px at 92% -8%,rgba(216,192,138,.12),transparent 62%),radial-gradient(700px 600px at -18% 45%,rgba(120,130,150,.08),transparent 65%),#070809!important}
+body:before{opacity:.025!important;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px)!important;background-size:64px 64px!important;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+.top{position:fixed!important;top:0;left:0;right:0;z-index:90;padding:14px 20px!important;background:linear-gradient(180deg,rgba(7,8,9,.96),rgba(7,8,9,.78),transparent)!important;border:0!important;backdrop-filter:blur(18px)}
+.topin{max-width:1120px!important;margin:auto!important}.logo{font-size:12px!important;font-weight:800!important;letter-spacing:.42em!important;color:#f3f2ee!important}.logo span{color:#f3f2ee!important}.save{font-size:8px!important;color:#8f968f!important;border:0!important;background:transparent!important}
+.app{max-width:1120px!important;padding:76px 18px 130px!important}
+.hero{min-height:600px!important;padding:38px!important;border-radius:38px!important;border:1px solid rgba(255,255,255,.09)!important;background:linear-gradient(145deg,rgba(19,21,24,.98),rgba(8,9,10,.99))!important;box-shadow:0 45px 120px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.06)!important;position:relative;overflow:hidden!important;display:flex;flex-direction:column;justify-content:flex-end}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.035),transparent 28%,transparent 65%,rgba(216,192,138,.04));border-radius:38px}
+.hero:after{content:"";position:absolute;right:-210px;top:-230px;width:650px;height:650px;background:radial-gradient(circle,rgba(216,192,138,.15),rgba(216,192,138,.035) 32%,transparent 68%);filter:blur(2px);pointer-events:none}
+.heroTop{position:absolute!important;left:38px;right:38px;top:30px;z-index:4;display:flex;align-items:center;gap:12px}.brandMark{width:38px!important;height:38px!important;border-radius:12px!important;border:1px solid rgba(216,192,138,.35)!important;background:rgba(216,192,138,.055)!important;color:var(--accent)!important;font-family:Georgia,serif!important;font-size:17px!important;box-shadow:0 10px 30px rgba(0,0,0,.25)!important}.heroWord{font-size:10px!important;font-weight:800;letter-spacing:.42em!important;color:#c9c5bd!important}.heroStatus{margin-left:auto!important;width:7px;height:7px!important;padding:0!important;border:0!important;background:var(--ok)!important;box-shadow:0 0 0 5px rgba(105,211,160,.07),0 0 20px rgba(105,211,160,.7)!important;font-size:0!important}
+.heroMain{position:relative;z-index:3;display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:42px;align-items:end;margin-bottom:32px}.heroEyebrow{color:#aaa49a!important;font-size:8px!important;font-weight:800!important;letter-spacing:.3em!important;margin-bottom:18px!important}.hero h1{font-size:clamp(54px,8vw,88px)!important;line-height:.88!important;letter-spacing:-.065em!important;font-weight:500!important;margin:0!important;color:#f5f3ee!important}.hero h1 em{font-style:normal!important;color:var(--accent)!important}.heroLead{max-width:500px;margin:22px 0 0;color:#858b93;font-size:13px;line-height:1.55}.heroLead b{color:#d7d7d2;font-weight:600}
+.scorePanel{justify-self:end;width:250px;padding:22px;border:1px solid rgba(255,255,255,.09);border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012));box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 24px 70px rgba(0,0,0,.3)}
+.scoreRing{width:168px;height:168px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--accent) calc(var(--score,0)*1%),rgba(255,255,255,.07) 0);position:relative;box-shadow:0 0 60px rgba(216,192,138,.08)}
+.scoreRing:before{content:"";position:absolute;inset:8px;border-radius:50%;background:#0b0d0f;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.scoreInner{position:relative;text-align:center}.scoreInner strong{display:block;font-size:40px;line-height:1;font-weight:500;letter-spacing:-.06em}.scoreInner span{display:block;margin-top:7px;color:#777d84;text-transform:uppercase;font-size:7px;letter-spacing:.22em;font-weight:800}.scoreCaption{text-align:center;color:#a6a9ad;font-size:10px}.scoreCaption b{color:#e6e5e1;font-weight:650}
+.meta{position:relative;z-index:3;margin-top:0!important;display:grid!important;grid-template-columns:1.25fr .8fr 1fr 1fr!important;gap:1px!important;background:rgba(255,255,255,.08)!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:20px!important;overflow:hidden!important}.field{padding:15px 16px!important;border:0!important;border-radius:0!important;background:rgba(8,9,10,.72)!important}.field input,.field select{background:transparent!important;border:0!important;border-radius:0!important;padding:4px 0!important;min-height:28px!important;font-size:12px!important}.cap{font-size:7px!important;letter-spacing:.19em!important;color:#6f747b!important;margin-bottom:5px!important}
+.stats{position:relative;z-index:3;grid-template-columns:repeat(4,1fr)!important;gap:1px!important;margin-top:1px!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:20px!important;overflow:hidden!important;background:rgba(255,255,255,.07)!important}.stat{border:0!important;border-radius:0!important;background:rgba(8,9,10,.72)!important;padding:14px 16px!important}.stat strong{font-size:23px!important;font-weight:500!important;letter-spacing:-.045em}.stat small{font-size:7px!important;letter-spacing:.14em;text-transform:uppercase;color:#70757c!important}.bar{height:2px!important;margin-top:12px!important;background:rgba(255,255,255,.08)!important;border:0!important;padding:0!important}.bar i{background:linear-gradient(90deg,#a78b58,var(--accent),#f2e5bf)!important;box-shadow:0 0 18px rgba(216,192,138,.3)!important}
+.section{margin-top:22px!important}.category{border:1px solid rgba(255,255,255,.075)!important;border-radius:26px!important;background:linear-gradient(145deg,rgba(17,19,22,.98),rgba(10,11,13,.98))!important;box-shadow:0 22px 65px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.035)!important;margin-bottom:12px!important}.category summary{padding:20px 21px!important}.catname{font-size:15px!important;font-weight:650!important;letter-spacing:-.01em}.dot{width:7px!important;height:7px!important;background:var(--accent)!important;box-shadow:0 0 16px rgba(216,192,138,.6)!important}.count{font-size:10px!important;color:#92979e!important}.categoryBody{padding:0 21px 10px!important}.check{padding:19px 1px!important;border-color:rgba(255,255,255,.065)!important}.question{font-size:13px!important;font-weight:600!important}.statuses{gap:7px!important}.statuses span{min-height:44px!important;display:grid!important;place-items:center!important;background:#0a0c0f!important;border-color:rgba(255,255,255,.08)!important;border-radius:13px!important}.statuses input:checked+span{box-shadow:inset 0 0 0 1px currentColor,0 10px 28px rgba(0,0,0,.22)!important}.problem{background:#0a0c0f!important;border-color:rgba(255,255,255,.08)!important}.chip{background:#14171b!important;border-color:rgba(255,255,255,.09)!important}
+.sectionHead{margin:0 2px 13px!important}.sectionHead h2{font-size:34px!important;font-weight:500!important;letter-spacing:-.045em!important}.sectionHead .kicker{font-size:8px!important;letter-spacing:.25em!important;color:#858b92!important}.sub{color:#767c83!important}.card{border:1px solid rgba(255,255,255,.075)!important;border-radius:24px!important;background:linear-gradient(145deg,rgba(17,19,22,.98),rgba(10,11,13,.98))!important;box-shadow:0 20px 55px rgba(0,0,0,.22)!important}.btn{border-color:rgba(255,255,255,.1)!important;background:#0c0e11!important;border-radius:13px!important}.btn.primary{background:linear-gradient(135deg,#e6d09d,#b9955a)!important;color:#17130b!important;border:0!important;box-shadow:0 10px 28px rgba(216,192,138,.14)!important}
+.reportPreview{gap:12px!important}.reportGroup{border:1px solid rgba(255,255,255,.08)!important;background:linear-gradient(145deg,#111317,#0b0d0f)!important;border-radius:24px!important;box-shadow:0 18px 50px rgba(0,0,0,.22)!important}.reportGroupHead{padding:17px 18px!important;border-color:rgba(255,255,255,.065)!important}.reportGroupHead b{font-size:12px!important}.reportNum{background:rgba(216,192,138,.09)!important;border:1px solid rgba(216,192,138,.18)!important;color:var(--accent)!important}
+.bottom{width:min(680px,calc(100% - 26px))!important;background:rgba(12,14,16,.82)!important;border:1px solid rgba(255,255,255,.11)!important;border-radius:25px!important;box-shadow:0 30px 90px rgba(0,0,0,.72),inset 0 1px 0 rgba(255,255,255,.05)!important;backdrop-filter:blur(28px)!important;padding:5px!important}.navBtn{height:60px!important;color:#737980!important;border-radius:18px!important}.navBtn.active{background:linear-gradient(145deg,rgba(216,192,138,.16),rgba(216,192,138,.035))!important;color:#e2c98f!important}.navIcon{font-size:17px!important}.navLabel{font-size:8px!important;letter-spacing:.05em!important}
+@media(max-width:720px){.app{padding:66px 12px 126px!important}.hero{min-height:650px!important;padding:25px!important;border-radius:31px!important}.heroTop{left:25px;right:25px;top:24px}.heroMain{grid-template-columns:1fr;gap:25px;margin-bottom:24px}.scorePanel{justify-self:start;width:100%;display:flex;align-items:center;gap:18px;padding:15px 17px}.scoreRing{width:112px;height:112px;margin:0;flex:none}.scoreInner strong{font-size:29px}.scoreCaption{text-align:left}.meta{grid-template-columns:1fr 1fr!important}.meta .field:first-child{grid-column:1/-1}.stats{grid-template-columns:1fr 1fr!important}.hero h1{font-size:54px!important}.heroLead{font-size:12px}.categoryBody{padding:0 15px 8px!important}}
+@media(max-width:430px){.hero{min-height:670px!important}.hero h1{font-size:49px!important}.meta{grid-template-columns:1fr!important}.meta .field:first-child{grid-column:auto}.scorePanel{gap:14px}.scoreRing{width:100px;height:100px}.stats{grid-template-columns:1fr 1fr!important}}
+
+</style><style>
+/* V14 logo refinement */
+.topin{justify-content:flex-end!important}
+.topin>div:first-child{display:none!important}
+.heroTop{justify-content:flex-end!important;left:25px!important;right:25px!important;top:24px!important;gap:8px!important}
+.heroTop .brandMark{order:1!important}
+.heroTop .heroWord{order:2!important;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;font-size:15px!important;font-weight:500!important;letter-spacing:-.02em!important;color:#f0ede6!important;display:block!important}
+.heroTop .heroStatus{display:none!important}
+@media(min-width:721px){.heroTop{left:38px!important;right:38px!important;top:30px!important}.heroTop .heroWord{font-size:17px!important}}
+
+/* V14 — final logo + export polish */
+.heroTop{justify-content:flex-end!important}
+.pdf-brand{display:flex;align-items:center;gap:9px;margin-bottom:18px;color:#f1eee7;font-size:18px;font-weight:500;letter-spacing:-.02em}.pdf-brand-g{width:34px;height:34px;border:1px solid rgba(216,192,138,.5);border-radius:10px;display:grid;place-items:center;color:#d8c08a;font:700 18px Georgia,serif;background:rgba(216,192,138,.06)}
+</style>
+</head>
+<body>
+<header class="top"><div class="topin"><div></div><div class="save" id="saveState">● сохранено</div></div></header>
+
+<main class="app">
+
+<section class="tab active" id="tab-check">
+ <div class="hero">
+  <div class="heroTop"><div class="brandMark"><span>G</span></div><div class="heroWord">de Control</div></div>
+  <div class="heroMain">
+   <div class="heroCopy">
+    <h1>Контроль<br><em>магазина</em></h1>
+   </div>
+   <div class="scorePanel">
+    <div class="scoreRing" id="scoreRing" style="--score:0"><div class="scoreInner"><strong id="scoreBig">0%</strong><span>готовность</span></div></div>
+    <div class="scoreCaption"><b id="scoreCaption">0 из 19</b><br>пунктов отмечено</div>
+   </div>
+  </div>
+  <div class="meta">
+   <div class="field"><label class="cap">Магазин</label><select id="store"><option>Пушка</option><option>Холодка</option><option>Универ</option><option>Пролет</option></select></div>
+   <div class="field"><label class="cap">Дата</label><input id="date" type="date"></div>
+   <div class="field"><label class="cap">Проверяющий</label><input id="checker" placeholder="Имя"></div>
+   <div class="field"><label class="cap">Продавец</label><input id="seller" placeholder="Имя / смена"></div>
+  </div>
+  <div class="stats">
+   <div class="stat"><strong id="done">0/0</strong><small>проверено</small></div>
+   <div class="stat"><strong id="issues">0</strong><small>замечаний</small></div>
+   <div class="stat"><strong id="bad">0</strong><small>проблем</small></div>
+   <div class="stat"><strong id="pct">0%</strong><small>готовность</small></div>
+  </div>
+  <div class="bar"><i id="bar"></i></div>
+ </div>
+ <div class="section" id="checklist"><details class="category" open><summary><span class="catname"><i class="dot"></i>Выкладка жидкостей</span><span class="count" id="cat0">0/5</span></summary><div class="categoryBody"><div class="check" data-id="1">
+<div class="question">Жидкости выложены аккуратно и логично</div>
+<div class="statuses">
+<label><input type="radio" name="s1" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s1" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s1" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Всё аккуратно')">Всё аккуратно</button><button class="chip" type="button" onclick="quickAdd(this,'Переставить')">Переставить</button><button class="chip" type="button" onclick="quickAdd(this,'Разложить по брендам')">Разложить по брендам</button></div></div>
+</div><div class="check" data-id="2">
+<div class="question">Ароматизаторы расставлены по алфавиту</div>
+<div class="statuses">
+<label><input type="radio" name="s2" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s2" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s2" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'По алфавиту')">По алфавиту</button><button class="chip" type="button" onclick="quickAdd(this,'Переставить')">Переставить</button><button class="chip" type="button" onclick="quickAdd(this,'Есть перемешанные')">Есть перемешанные</button></div></div>
+</div><div class="check" data-id="3">
+<div class="question">Нет хаоса, перемешанных вкусов и брендов</div>
+<div class="statuses">
+<label><input type="radio" name="s3" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s3" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s3" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Есть хаос')">Есть хаос</button><button class="chip" type="button" onclick="quickAdd(this,'Переставить')">Переставить</button><button class="chip" type="button" onclick="quickAdd(this,'Разложить по брендам')">Разложить по брендам</button></div></div>
+</div><div class="check" data-id="4">
+<div class="question">Поды, баки, картриджи и испарители выложены аккуратно</div>
+<div class="statuses">
+<label><input type="radio" name="s4" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s4" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s4" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Переставить')">Переставить</button><button class="chip" type="button" onclick="quickAdd(this,'Пополнить выкладку')">Пополнить выкладку</button><button class="chip" type="button" onclick="quickAdd(this,'Разложить по типам')">Разложить по типам</button></div></div>
+</div><div class="check" data-id="5">
+<div class="question">Товар на витрине заполнен и представлен равномерно</div>
+<div class="statuses">
+<label><input type="radio" name="s5" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s5" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s5" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Пополнить')">Пополнить</button><button class="chip" type="button" onclick="quickAdd(this,'Разровнять')">Разровнять</button><button class="chip" type="button" onclick="quickAdd(this,'Есть пустые места')">Есть пустые места</button></div></div>
+</div></div></details>
+<details class="category" open><summary><span class="catname"><i class="dot"></i>Чистота</span><span class="count" id="cat1">0/7</span></summary><div class="categoryBody"><div class="check" data-id="6">
+<div class="question">Все полки чистые</div>
+<div class="statuses">
+<label><input type="radio" name="s6" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s6" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s6" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Чисто')">Чисто</button><button class="chip" type="button" onclick="quickAdd(this,'Местами пыль')">Местами пыль</button><button class="chip" type="button" onclick="quickAdd(this,'Грязно')">Грязно</button></div></div>
+</div><div class="check" data-id="7">
+<div class="question">Под ароматизаторами чисто</div>
+<div class="statuses">
+<label><input type="radio" name="s7" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s7" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s7" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Чисто')">Чисто</button><button class="chip" type="button" onclick="quickAdd(this,'Есть пыль')">Есть пыль</button><button class="chip" type="button" onclick="quickAdd(this,'Грязно')">Грязно</button><button class="chip" type="button" onclick="quickAdd(this,'Протереть')">Протереть</button></div></div>
+</div><div class="check" data-id="8">
+<div class="question">Витрины и стекла чистые</div>
+<div class="statuses">
+<label><input type="radio" name="s8" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s8" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s8" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Чисто')">Чисто</button><button class="chip" type="button" onclick="quickAdd(this,'Отпечатки')">Отпечатки</button><button class="chip" type="button" onclick="quickAdd(this,'Пыль')">Пыль</button><button class="chip" type="button" onclick="quickAdd(this,'Разводы')">Разводы</button></div></div>
+</div><div class="check" data-id="9">
+<div class="question">Рабочее место чистое</div>
+<div class="statuses">
+<label><input type="radio" name="s9" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s9" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s9" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Чисто')">Чисто</button><button class="chip" type="button" onclick="quickAdd(this,'Беспорядок')">Беспорядок</button><button class="chip" type="button" onclick="quickAdd(this,'Лишние вещи')">Лишние вещи</button><button class="chip" type="button" onclick="quickAdd(this,'Убрать')">Убрать</button></div></div>
+</div><div class="check" data-id="10">
+<div class="question">Зона отдыха чистая и аккуратная</div>
+<div class="statuses">
+<label><input type="radio" name="s10" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s10" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s10" data-state="bad"><span>× Проблема</span></label><label><input type="radio" name="s10" data-state="na"><span>— Нет зоны</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Чисто')">Чисто</button><button class="chip" type="button" onclick="quickAdd(this,'Пыль')">Пыль</button><button class="chip" type="button" onclick="quickAdd(this,'Мусор')">Мусор</button><button class="chip" type="button" onclick="quickAdd(this,'Беспорядок')">Беспорядок</button></div></div>
+</div><div class="check" data-id="11">
+<div class="question">Поды и кальяны чистые</div>
+<div class="statuses">
+<label><input type="radio" name="s11" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s11" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s11" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Чистые')">Чистые</button><button class="chip" type="button" onclick="quickAdd(this,'Есть пыль')">Есть пыль</button><button class="chip" type="button" onclick="quickAdd(this,'Грязные')">Грязные</button><button class="chip" type="button" onclick="quickAdd(this,'Почистить')">Почистить</button></div></div>
+</div><div class="check" data-id="12">
+<div class="question">Нет мусора, коробок и лишних вещей</div>
+<div class="statuses">
+<label><input type="radio" name="s12" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s12" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s12" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Всё убрано')">Всё убрано</button><button class="chip" type="button" onclick="quickAdd(this,'Есть коробки')">Есть коробки</button><button class="chip" type="button" onclick="quickAdd(this,'Есть мусор')">Есть мусор</button><button class="chip" type="button" onclick="quickAdd(this,'Есть лишние вещи')">Есть лишние вещи</button></div></div>
+</div></div></details>
+<details class="category" ><summary><span class="catname"><i class="dot"></i>Цены и маркировка</span><span class="count" id="cat2">0/4</span></summary><div class="categoryBody"><div class="check" data-id="13">
+<div class="question">Цены актуальны</div>
+<div class="statuses">
+<label><input type="radio" name="s13" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s13" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s13" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Актуальны')">Актуальны</button><button class="chip" type="button" onclick="quickAdd(this,'Есть старые цены')">Есть старые цены</button><button class="chip" type="button" onclick="quickAdd(this,'Проверить цену')">Проверить цену</button><button class="chip" type="button" onclick="quickAdd(this,'Исправить')">Исправить</button></div></div>
+</div><div class="check" data-id="14">
+<div class="question">Ценники соответствуют товару</div>
+<div class="statuses">
+<label><input type="radio" name="s14" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s14" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s14" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Соответствуют')">Соответствуют</button><button class="chip" type="button" onclick="quickAdd(this,'Не тот ценник')">Не тот ценник</button><button class="chip" type="button" onclick="quickAdd(this,'Нет ценника')">Нет ценника</button><button class="chip" type="button" onclick="quickAdd(this,'Исправить')">Исправить</button></div></div>
+</div><div class="check" data-id="15">
+<div class="question">Штрихкоды есть там, где должны быть</div>
+<div class="statuses">
+<label><input type="radio" name="s15" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s15" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s15" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Все есть')">Все есть</button><button class="chip" type="button" onclick="quickAdd(this,'Не хватает')">Не хватает</button><button class="chip" type="button" onclick="quickAdd(this,'Добавить')">Добавить</button></div></div>
+</div><div class="check" data-id="16">
+<div class="question">Штрихкоды читаемые и правильно размещены</div>
+<div class="statuses">
+<label><input type="radio" name="s16" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s16" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s16" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Всё хорошо')">Всё хорошо</button><button class="chip" type="button" onclick="quickAdd(this,'Плохо читается')">Плохо читается</button><button class="chip" type="button" onclick="quickAdd(this,'Неправильно наклеен')">Неправильно наклеен</button><button class="chip" type="button" onclick="quickAdd(this,'Переклеить')">Переклеить</button></div></div>
+</div></div></details>
+<details class="category" ><summary><span class="catname"><i class="dot"></i>Состояние магазина</span><span class="count" id="cat3">0/3</span></summary><div class="categoryBody"><div class="check" data-id="17">
+<div class="question">Повреждения товара или витрин зафиксированы</div>
+<div class="statuses">
+<label><input type="radio" name="s17" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s17" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s17" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Нет повреждений')">Нет повреждений</button><button class="chip" type="button" onclick="quickAdd(this,'Есть повреждение')">Есть повреждение</button><button class="chip" type="button" onclick="quickAdd(this,'Зафиксировать')">Зафиксировать</button></div></div>
+</div><div class="check" data-id="18">
+<div class="question">Все проблемы магазина зафиксированы</div>
+<div class="statuses">
+<label><input type="radio" name="s18" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s18" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s18" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Проблем нет')">Проблем нет</button><button class="chip" type="button" onclick="quickAdd(this,'Есть проблема')">Есть проблема</button><button class="chip" type="button" onclick="quickAdd(this,'Добавить в задачи')">Добавить в задачи</button></div></div>
+</div><div class="check" data-id="19">
+<div class="question">Магазин в целом выглядит аккуратно и готов к работе</div>
+<div class="statuses">
+<label><input type="radio" name="s19" data-state="ok"><span>✓ ОК</span></label>
+<label><input type="radio" name="s19" data-state="issue"><span>! Замечание</span></label>
+<label><input type="radio" name="s19" data-state="bad"><span>× Проблема</span></label>
+</div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Всё готово')">Всё готово</button><button class="chip" type="button" onclick="quickAdd(this,'Есть недочёты')">Есть недочёты</button><button class="chip" type="button" onclick="quickAdd(this,'Нужно привести в порядок')">Нужно привести в порядок</button></div></div>
+</div></div></details>
+</section>
+
+<section class="tab" id="tab-missing">
+ <div class="sectionHead"><div><div class="kicker">Inventory</div><h2>Недостающий товар</h2><div class="sub">Что нужно заказать или довезти.</div></div><button class="btn primary" onclick="addMissing()">＋ Добавить</button></div>
+ <div class="card"><div id="missingRows"></div><div id="missingEmpty" class="empty">Пока ничего не добавлено.</div></div>
+</section>
+
+<section class="tab" id="tab-movement">
+ <div class="sectionHead"><div><div class="kicker">Logistics</div><h2>Перемещения</h2><div class="sub">Откуда → куда → позиции.</div></div><button class="btn primary" onclick="addMove()">＋ Добавить</button></div>
+ <div id="moves"></div><div id="movesEmpty" class="empty">Пока нет перемещений.</div>
+</section>
+
+<section class="tab" id="tab-tasks">
+ <div class="sectionHead"><div><div class="kicker">Action list</div><h2>Задачи магазина</h2><div class="sub">Все замечания собираются сюда автоматически.</div></div><button class="btn" onclick="addManualTask()">＋ Своя</button></div>
+ <div id="taskList"></div><div id="manualTasks"></div>
+ <div class="card" style="margin-top:10px"><label class="cap">Общий комментарий</label><textarea id="finalComment" placeholder="Общий вывод по магазину..."></textarea></div>
+</section>
+
+<section class="tab" id="tab-report">
+ <div class="sectionHead"><div><div class="kicker">Export</div><h2>Отчёт</h2><div class="sub">Собери только нужные разделы.</div></div></div>
+ <div class="card">
+  <div class="reportOptions">
+   <label class="checkOpt"><input type="checkbox" class="rep" value="check" checked> Результаты проверки</label>
+   <label class="checkOpt"><input type="checkbox" class="rep" value="moves" checked> Перемещения</label>
+   <label class="checkOpt"><input type="checkbox" class="rep" value="tasks" checked> Задачи</label>
+   <label class="checkOpt"><input type="checkbox" class="rep" value="missing" checked> Недостающий товар</label>
+   <label class="checkOpt"><input type="checkbox" class="rep" value="summary" checked> Итог</label>
+   <label class="checkOpt"><input type="checkbox" id="onlyProblems"> Только замечания</label>
+  </div>
+  <div class="actions"><button class="btn primary" onclick="downloadPDF()">Скачать PDF</button><button class="btn" onclick="exportExcel()">Скачать Excel</button><button class="btn red" onclick="newCheck()">Новая проверка</button></div>
+ </div>
+ <div class="card"><div class="kicker">Предпросмотр</div><h2 id="reportTitle" style="margin-top:5px">Проверка не завершена</h2><div class="sub" id="reportSub">Заполни магазин и пункты проверки.</div></div>
+ <div id="reportPreview" class="reportPreview"></div>
+</section>
+
+</main>
+
+<nav class="bottom">
+ <div class="bottomGrid">
+  <button class="navBtn active" onclick="openTab('check',this)"><span class="navIcon">✓</span><span class="navLabel">Проверка</span></button>
+  <button class="navBtn" onclick="openTab('missing',this)"><span class="navIcon">▦</span><span class="navLabel">Остатки</span></button>
+  <button class="navBtn" onclick="openTab('movement',this)"><span class="navIcon">⇄</span><span class="navLabel">Движение</span></button>
+  <button class="navBtn" onclick="openTab('tasks',this)"><span class="navIcon">!</span><span class="navLabel">Задачи</span></button>
+  <button class="navBtn" onclick="openTab('report',this)"><span class="navIcon">▤</span><span class="navLabel">Отчёт</span></button>
+ </div>
+</nav>
+
+<div id="pdfStage" class="pdf-stage"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const groups=[
+ {name:"Выкладка жидкостей",items:[
+  "Жидкости выложены аккуратно и логично",
+  "Ароматизаторы расставлены по алфавиту",
+  "Нет хаоса, перемешанных вкусов и брендов",
+  "Поды, баки, картриджи и испарители выложены аккуратно",
+  "Товар на витрине заполнен и представлен равномерно"
+ ]},
+ {name:"Чистота",items:[
+  "Все полки чистые",
+  "Под ароматизаторами чисто",
+  "Витрины и стекла чистые",
+  "Рабочее место чистое",
+  "Зона отдыха чистая и аккуратная",
+  "Поды и кальяны чистые",
+  "Нет мусора, коробок и лишних вещей"
+ ]},
+ {name:"Цены и маркировка",items:[
+  "Цены актуальны",
+  "Ценники соответствуют товару",
+  "Штрихкоды есть там, где должны быть",
+  "Штрихкоды читаемые и правильно размещены"
+ ]},
+ {name:"Состояние магазина",items:[
+  "Повреждения товара или витрин зафиксированы",
+  "Все проблемы магазина зафиксированы",
+  "Магазин в целом выглядит аккуратно и готов к работе"
+ ]}
+];
+const quick=["Протереть","Переставить","Исправить цену","Добавить штрихкод","Убрать лишнее","Заказать"];
+let total=0;
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+
+function localDate(){const d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
+
+function renderChecks(){
+ total=document.querySelectorAll(".check").length;
+ update();
+}
+function openTab(id,btn){
+ document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+ $("tab-"+id).classList.add("active");
+ document.querySelectorAll(".navBtn").forEach(x=>x.classList.remove("active"));
+ btn.classList.add("active");
+ window.scrollTo({top:0,behavior:"smooth"});
+ if(id==="tasks")buildTasks();
+ if(id==="report")updateReport();
+}
+function quickAdd(btn,text){const ta=btn.closest(".check").querySelector(".problemText");ta.value+=(ta.value?", ":"")+text;update();save()}
+document.addEventListener("change",e=>{
+ if(e.target.matches(".statuses input")){
+  const c=e.target.closest(".check");c.classList.toggle("problemOn",!["ok","na"].includes(e.target.dataset.state));update();save()
+ }
+ if(e.target.matches("input,select")){save();update()}
+});
+document.addEventListener("input",e=>{if(e.target.matches("input,select,textarea")){save();update()}});
+
+function update(){
+ let filled=0,issues=0,bad=0;
+ document.querySelectorAll(".check").forEach(c=>{
+  const r=c.querySelector(".statuses input:checked");if(r){filled++;if(r.dataset.state==="issue")issues++;if(r.dataset.state==="bad")bad++}
+ });
+ $("done").textContent=filled+"/"+total;$("issues").textContent=issues;$("bad").textContent=bad;$("pct").textContent=total?Math.round(filled/total*100)+"%":"0%";$("bar").style.width=total?(filled/total*100)+"%":"0%";
+ const score=total?Math.round(filled/total*100):0; const ring=$("scoreRing"); if(ring){ring.style.setProperty("--score",score);$("scoreBig").textContent=score+"%";$("scoreCaption").textContent=filled+" из "+total}
+ let offset=0;groups.forEach((g,gi)=>{let n=0;document.querySelectorAll(".check").forEach((c,i)=>{if(i>=offset&&i<offset+g.items.length&&c.querySelector(".statuses input:checked"))n++});$("cat"+gi).textContent=n+"/"+g.items.length;offset+=g.items.length});
+ buildTasks();updateReport()
+}
+function collect(){
+ return {
+ store:$("store").value,date:$("date").value,checker:$("checker").value,seller:$("seller").value,final:$("finalComment").value,
+ checks:Array.from(document.querySelectorAll(".check")).map(c=>({state:c.querySelector(".statuses input:checked")?.dataset.state||"",text:c.querySelector(".problemText").value})),
+ missing:Array.from(document.querySelectorAll(".missingRow")).map(r=>({name:r.querySelector(".mn").value,qty:r.querySelector(".mq").value})),
+ moves:Array.from(document.querySelectorAll(".moveRow")).map(r=>({from:r.querySelector(".mf").value,to:r.querySelector(".mt").value,items:Array.from(r.querySelectorAll(".moveItem")).map(i=>({name:i.querySelector(".mi").value,qty:i.querySelector(".miq").value}))})),
+ manual:Array.from(document.querySelectorAll(".manualText")).map(x=>x.value)
+ }
+}
+function save(){localStorage.setItem("GDE_Control_V14",JSON.stringify(collect()));$("saveState").textContent="● сохранено"}
+function load(){
+ const raw=localStorage.getItem("GDE_Control_V14");if(!raw)return;
+ try{const d=JSON.parse(raw);$("store").value=d.store||"Пушка";$("date").value=d.date||localDate();$("checker").value=d.checker||"";$("seller").value=d.seller||"";$("finalComment").value=d.final||"";
+ (d.checks||[]).forEach((x,i)=>{const c=document.querySelectorAll(".check")[i];if(!c)return;if(x.state){const r=c.querySelector(`[data-state="${x.state}"]`);if(r)r.checked=true;c.classList.toggle("problemOn",!["ok","na"].includes(x.state))}c.querySelector(".problemText").value=x.text||""});
+ (d.missing||[]).forEach(x=>addMissing(x.name,x.qty));(d.moves||[]).forEach(x=>addMove(x));(d.manual||[]).filter(Boolean).forEach(x=>addManualTask(x));
+ }catch(e){}
+ update()
+}
+function addMissing(name="",qty=""){
+ const d=document.createElement("div");d.className="row missingRow";d.innerHTML=`<input class="mn" placeholder="Товар / ароматизатор" value="${esc(name)}"><input class="mq" placeholder="Кол-во" value="${esc(qty)}"><button class="btn icon remove">×</button>`;$("missingRows").appendChild(d);$("missingEmpty").style.display="none";save()
+}
+function stores(v=""){return '<option value="">Магазин</option>'+["Пушка","Холодка","Универ","Пролет"].map(x=>`<option ${x===v?"selected":""}>${x}</option>`).join("")}
+function addMove(data={}){
+ const d=document.createElement("div");d.className="card moveRow";d.innerHTML=`<div class="row2"><div><label class="cap">Откуда</label><select class="mf">${stores(data.from)}</select></div><div><label class="cap">Куда</label><select class="mt">${stores(data.to)}</select></div></div><div class="moveItems" style="margin-top:8px"></div><button class="btn small" onclick="addMoveItem(this)">＋ Позиция</button> <button class="btn small red removeMove">Удалить</button>`;$("moves").appendChild(d);$("movesEmpty").style.display="none";(data.items||[{}]).forEach(x=>addMoveItem(d.querySelector(".btn"),x));save()
+}
+function addMoveItem(btn,i={}){
+ const d=document.createElement("div");d.className="row moveItem";d.innerHTML=`<input class="mi" placeholder="Что переместить" value="${esc(i.name||"")}"><input class="miq" placeholder="Кол-во" value="${esc(i.qty||"")}"><button class="btn icon remove">×</button>`;btn.closest(".moveRow").querySelector(".moveItems").appendChild(d);save()
+}
+function addManualTask(v=""){const d=document.createElement("div");d.className="row manualTask";d.innerHTML=`<input class="manualText" style="grid-column:1/3" placeholder="Задача по магазину" value="${esc(v)}"><button class="btn icon remove">×</button>`;$("manualTasks").appendChild(d);save()}
+document.addEventListener("change",e=>{if(e.target.matches(".rep,#onlyProblems"))updateReport();});
+document.addEventListener("click",e=>{
+ if(e.target.classList.contains("remove")){const row=e.target.closest(".missingRow,.moveItem,.manualTask");const parent=row?.parentElement;row?.remove();if(parent?.id==="missingRows"&&!parent.children.length)$("missingEmpty").style.display="block";save();update()}
+ if(e.target.classList.contains("removeMove")){const card=e.target.closest(".moveRow");card.remove();if(!$("moves").children.length)$("movesEmpty").style.display="block";save();update()}
+});
+function taskData(){
+ const a=[];
+ document.querySelectorAll(".check").forEach(c=>{const r=c.querySelector(".statuses input:checked"),t=c.querySelector(".problemText").value.trim();if(r&&(r.dataset.state==="issue"||r.dataset.state==="bad"))a.push({title:c.querySelector(".question").textContent,status:r.dataset.state,text:t||"Требует исправления"})});
+ document.querySelectorAll(".manualText").forEach(x=>{if(x.value.trim())a.push({title:"Дополнительная задача",status:"issue",text:x.value.trim()})});
+ return a
+}
+function buildTasks(){
+ const a=taskData();$("taskList").innerHTML=a.length?a.map(x=>`<div class="task"><div class="taskTop"><b>${esc(x.title)}</b><span class="badge ${x.status==="bad"?"bad":"warn"}">${x.status==="bad"?"ПРОБЛЕМА":"ЗАМЕЧАНИЕ"}</span></div><p>${esc(x.text)}</p></div>`).join(""):'<div class="empty">Замечаний пока нет.</div>'
+}
+function updateReport(){
+ const c=collect(),t=taskData(),filled=c.checks.filter(x=>x.state).length;
+ $("reportTitle").textContent=c.store+" · "+(filled+"/"+total);
+ $("reportSub").textContent=`${t.length} задач · ${c.missing.filter(x=>x.name.trim()).length} недостающих позиций · ${c.moves.length} перемещений`;
+ const preview=$("reportPreview"); if(!preview)return;
+ const only=$("onlyProblems").checked;
+ let html="";
+ const cats=[...document.querySelectorAll(".category")];
+ cats.forEach((cat,ci)=>{
+   const title=cat.querySelector(".catname")?.textContent.trim()||("Раздел "+(ci+1));
+   const checks=[...cat.querySelectorAll(".check")].map(c=>({q:c.querySelector(".question").textContent,state:c.querySelector(".statuses input:checked")?.dataset.state||"",text:c.querySelector(".problemText").value.trim()})).filter(x=>!only||x.state==="issue"||x.state==="bad");
+   if(!checks.length)return;
+   html+=`<div class="reportGroup"><div class="reportGroupHead"><b>${esc(title)}</b><span>${checks.length} пункт${checks.length===1?'':'ов'}</span></div>${checks.map((x,i)=>`<div class="reportPoint"><div class="reportPointTop"><span class="reportNum">${i+1}</span><div><b>${esc(x.q)}</b><div class="reportStatus rs-${x.state}">${statusName(x.state)}</div></div></div>${x.text?`<div class="reportComment">${esc(x.text)}</div>`:""}</div>`).join("")}</div>`;
+ });
+ if(!only){
+   if(c.moves.some(m=>m.items.some(x=>x.name.trim()))) html+=`<div class="reportGroup"><div class="reportGroupHead"><b>Перемещения</b><span>${c.moves.length}</span></div>${c.moves.map(m=>{const items=m.items.filter(x=>x.name.trim());if(!items.length)return "";return `<div class="reportMove"><div class="moveRoute">${esc(m.from||"—")} → ${esc(m.to||"—")}</div>${items.map(x=>`<div class="moveItemLine"><span>${esc(x.name)}</span><span>${esc(x.qty||"—")}</span></div>`).join("")}</div>`}).join("")}</div>`;
+   if(t.length) html+=`<div class="reportGroup"><div class="reportGroupHead"><b>Задачи магазина</b><span>${t.length}</span></div>${t.map((x,i)=>`<div class="reportPoint"><div class="reportPointTop"><span class="reportNum">${i+1}</span><div><b>${esc(x.title)}</b><div class="reportStatus rs-${x.status}">${x.status==="bad"?"ПРОБЛЕМА":"ЗАМЕЧАНИЕ"}</div></div></div><div class="reportComment">${esc(x.text)}</div></div>`).join("")}</div>`;
+   const miss=c.missing.filter(x=>x.name.trim());
+   if(miss.length) html+=`<div class="reportGroup"><div class="reportGroupHead"><b>Недостающий товар</b><span>${miss.length}</span></div>${miss.map((x,i)=>`<div class="reportPoint"><div class="reportPointTop"><span class="reportNum">${i+1}</span><div><b>${esc(x.name)}</b><div class="reportStatus">КОЛИЧЕСТВО: ${esc(x.qty||"—")}</div></div></div></div>`).join("")}</div>`;
+   html+=`<div class="reportGroup"><div class="reportGroupHead"><b>Итог</b><span>${filled}/${total}</span></div><div class="reportComment" style="margin:0;padding:14px 15px">${esc(c.final||"Общий комментарий не указан.")}</div></div>`;
+ }
+ preview.innerHTML=html||'<div class="card reportEmpty">По выбранным параметрам пока нечего показывать.</div>';
+}
+function statusName(s){return s==="ok"?"ОК":s==="issue"?"Замечание":s==="bad"?"Проблема":s==="na"?"Не применяется":"Не заполнено"}
+function page(title,body){const p=document.createElement("div");p.className="pdf-page";p.innerHTML=`<div class="pdf-brand"><span class="pdf-brand-g">G</span><span>de Control</span></div><div class="pdf-kicker">STORE CONTROL · ${esc($("store").value)}</div><h2>${esc(title)}</h2>${body}<div class="pdf-footer">${esc($("date").value||"Дата не указана")} · ${esc($("checker").value||"Проверяющий не указан")}</div>`;$("pdfStage").appendChild(p)}
+function table(head,rows){return `<table class="pdf-table"><thead><tr>${head.map(x=>`<th>${esc(x)}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(x=>`<td>${esc(x)}</td>`).join("")}</tr>`).join("")}</tbody></table>`}
+function pdfPoints(checks){return checks.map((x,i)=>`<div class="pdf-point"><span class="pdf-point-num">${i+1}</span><span class="pdf-point-title">${esc(x.q)}</span><span class="pdf-point-status" style="color:${x.state==="bad"?"#c94f42":x.state==="issue"?"#a16f25":"#31845e"}">${statusName(x.state)}</span>${x.text?`<div class="pdf-point-comment">${esc(x.text)}</div>`:""}</div>`).join("")}
+function buildPdf(){
+ $("pdfStage").innerHTML="";const c=collect(),sel=Array.from(document.querySelectorAll(".rep:checked")).map(x=>x.value),only=$("onlyProblems").checked;
+ const filled=c.checks.filter(x=>x.state).length,tasks=taskData(),miss=c.missing.filter(x=>x.name.trim());
+ if(sel.includes("summary")) page("Итог",`<div class="pdf-meta"><div class="pdf-box"><b>Магазин</b><br>${esc(c.store)}</div><div class="pdf-box"><b>Дата</b><br>${esc(c.date)}</div><div class="pdf-box"><b>Проверено</b><br>${filled}/${total}</div><div class="pdf-box"><b>Задач</b><br>${tasks.length}</div></div><div class="pdf-section">Общий вывод</div><div class="pdf-box">${esc(c.final||"Общий комментарий не указан.")}</div>`);
+ if(sel.includes("check")){
+   [...document.querySelectorAll(".category")].forEach(cat=>{const title=cat.querySelector(".catname")?.textContent.trim()||"Проверка";const checks=[...cat.querySelectorAll(".check")].map((el,i)=>({q:el.querySelector(".question").textContent,state:el.querySelector(".statuses input:checked")?.dataset.state||"",text:el.querySelector(".problemText").value.trim()})).filter(x=>x.state&&(!only||x.state==="issue"));if(checks.length)page(title,`<div class="pdf-section">Пункты раздела</div>${pdfPoints(checks)}`)});
+ }
+ if(sel.includes("moves")){const valid=c.moves.filter(m=>m.items.some(x=>x.name.trim()));if(valid.length)page("Перемещения",valid.map(m=>`<div class="pdf-move"><div class="pdf-move-route">${esc(m.from||"—")} → ${esc(m.to||"—")}</div>${m.items.filter(x=>x.name.trim()).map(x=>`<div class="pdf-move-item"><span>${esc(x.name)}</span><span>${esc(x.qty||"—")}</span></div>`).join("")}</div>`).join(""));}
+ if(sel.includes("tasks")&&tasks.length)page("Задачи магазина",tasks.map((x,i)=>`<div class="pdf-point"><span class="pdf-point-num">${i+1}</span><span class="pdf-point-title">${esc(x.title)}</span><span class="pdf-point-status" style="color:${x.status==="bad"?"#c94f42":"#a16f25"}">${x.status==="bad"?"ПРОБЛЕМА":"ЗАМЕЧАНИЕ"}</span><div class="pdf-point-comment">${esc(x.text)}</div></div>`).join(""));
+ if(sel.includes("missing")&&miss.length)page("Недостающий товар",miss.map((x,i)=>`<div class="pdf-point"><span class="pdf-point-num">${i+1}</span><span class="pdf-point-title">${esc(x.name)}</span><span class="pdf-point-status">${esc(x.qty||"—")} шт.</span></div>`).join(""));
+}
+async function downloadPDF(){
+ if(!window.html2canvas||!window.jspdf){alert("Модуль PDF не загрузился. Проверь интернет и обнови страницу.");return}
+ buildPdf();const pages=[...$("pdfStage").querySelectorAll(".pdf-page")];if(!pages.length)return;
+ const {jsPDF}=window.jspdf;const pdf=new jsPDF({orientation:"p",unit:"mm",format:"a4"});
+ for(let i=0;i<pages.length;i++){if(i)pdf.addPage();const canvas=await html2canvas(pages[i],{scale:2,backgroundColor:"#0b0d0f",useCORS:true});pdf.addImage(canvas.toDataURL("image/jpeg",.88),"JPEG",0,0,210,297)}
+ pdf.save(`GDE_Control_${$("store").value}_${$("date").value||"date"}.pdf`)
+}
+function newCheck(){
+ if(!confirm("Начать новую проверку? Текущие данные будут очищены."))return;
+ localStorage.removeItem("GDE_Control_V14");
+ $("store").value="Пушка";$("date").value=localDate();$("checker").value="";$("seller").value="";$("finalComment").value="";
+ document.querySelectorAll(".check input[type=radio]").forEach(x=>x.checked=false);
+ document.querySelectorAll(".problemText").forEach(x=>x.value="");
+ document.querySelectorAll(".check").forEach(x=>x.classList.remove("problemOn"));
+ $("missingRows").innerHTML="";$("missingEmpty").style.display="block";
+ $("moves").innerHTML="";$("movesEmpty").style.display="block";
+ $("manualTasks").innerHTML="";
+ document.querySelectorAll(".rep").forEach(x=>x.checked=true);$("onlyProblems").checked=false;
+ update();save();
+ openTab("check",document.querySelector('.navBtn'));
+}
+function exportExcel(){
+ const c=collect();let rows=[["GDE CONTROL"],["Магазин",c.store],["Дата",c.date],["Проверяющий",c.checker],["Продавец",c.seller],[],["Пункт","Статус","Комментарий"]];
+ c.checks.forEach((x,i)=>rows.push([document.querySelectorAll(".question")[i].textContent,statusName(x.state),x.text]));
+ rows.push([],["Недостающий товар","Количество"]);c.missing.filter(x=>x.name).forEach(x=>rows.push([x.name,x.qty]));
+ rows.push([],["Перемещения"]);c.moves.forEach(m=>m.items.filter(x=>x.name).forEach(x=>rows.push([m.from+" → "+m.to,x.name,x.qty])));
+ const t="<table>"+rows.map(r=>"<tr>"+r.map(x=>`<td>${esc(x)}</td>`).join("")+"</tr>").join("")+"</table>";
+ const blob=new Blob(["\ufeff"+t],{type:"application/vnd.ms-excel"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`GDE_Control_${c.store}_${c.date}.xls`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)
+}
+
+$("date").value=localDate();renderChecks();load();
+</script>
+</body>
+</html>
