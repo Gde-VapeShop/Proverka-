@@ -185,7 +185,7 @@ body:before{opacity:.025!important;background-image:linear-gradient(rgba(255,255
    <div class="stat"><strong id="done">0/0</strong><small>проверено</small></div>
    <div class="stat"><strong id="issues">0</strong><small>замечаний</small></div>
    <div class="stat"><strong id="bad">0</strong><small>проблем</small></div>
-   <div class="stat"><strong id="pct">0%</strong><small>готовность</small></div>
+   <div class="stat"><strong id="points">0/100</strong><small>баллы</small></div>
   </div>
   <div class="bar"><i id="bar"></i></div>
  </div>
@@ -230,7 +230,7 @@ body:before{opacity:.025!important;background-image:linear-gradient(rgba(255,255
 </div>
 <div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Пополнить')">Пополнить</button><button class="chip" type="button" onclick="quickAdd(this,'Разровнять')">Разровнять</button><button class="chip" type="button" onclick="quickAdd(this,'Есть пустые места')">Есть пустые места</button></div></div>
 </div></div></details>
-<details class="category" open><summary><span class="catname"><i class="dot"></i>Чистота</span><span class="count" id="cat1">0/7</span></summary><div class="categoryBody"><div class="check" data-id="6">
+<details class="category" open><summary><span class="catname"><i class="dot"></i>Чистота</span><span class="count" id="cat1">0/11</span></summary><div class="categoryBody"><div class="check" data-id="6">
 <div class="question">Все полки чистые</div>
 <div class="statuses">
 <label><input type="radio" name="s6" data-state="ok"><span>✓ ОК</span></label>
@@ -286,7 +286,23 @@ body:before{opacity:.025!important;background-image:linear-gradient(rgba(255,255
 <label><input type="radio" name="s12" data-state="bad"><span>× Проблема</span></label>
 </div>
 <div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Всё убрано')">Всё убрано</button><button class="chip" type="button" onclick="quickAdd(this,'Есть коробки')">Есть коробки</button><button class="chip" type="button" onclick="quickAdd(this,'Есть мусор')">Есть мусор</button><button class="chip" type="button" onclick="quickAdd(this,'Есть лишние вещи')">Есть лишние вещи</button></div></div>
-</div></div></details>
+<div class="check" data-id="20">
+<div class="question">Вода для пола есть</div>
+<div class="statuses"><label><input type="radio" name="s20" data-state="ok"><span>✓ ОК</span></label><label><input type="radio" name="s20" data-state="issue"><span>! Замечание</span></label><label><input type="radio" name="s20" data-state="bad"><span>× Проблема</span></label></div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Есть вода')">Есть вода</button><button class="chip" type="button" onclick="quickAdd(this,'Воды нет')">Воды нет</button><button class="chip" type="button" onclick="quickAdd(this,'Нужно долить')">Нужно долить</button></div></div>
+</div><div class="check" data-id="21">
+<div class="question">Пол помыт</div>
+<div class="statuses"><label><input type="radio" name="s21" data-state="ok"><span>✓ ОК</span></label><label><input type="radio" name="s21" data-state="issue"><span>! Замечание</span></label><label><input type="radio" name="s21" data-state="bad"><span>× Проблема</span></label></div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Пол чистый')">Пол чистый</button><button class="chip" type="button" onclick="quickAdd(this,'Нужно помыть')">Нужно помыть</button><button class="chip" type="button" onclick="quickAdd(this,'Есть грязь')">Есть грязь</button><button class="chip" type="button" onclick="quickAdd(this,'Повторно помыть')">Повторно помыть</button></div></div>
+</div><div class="check" data-id="22">
+<div class="question">Вода для шприцовни есть</div>
+<div class="statuses"><label><input type="radio" name="s22" data-state="ok"><span>✓ ОК</span></label><label><input type="radio" name="s22" data-state="issue"><span>! Замечание</span></label><label><input type="radio" name="s22" data-state="bad"><span>× Проблема</span></label></div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Вода есть')">Вода есть</button><button class="chip" type="button" onclick="quickAdd(this,'Воды нет')">Воды нет</button><button class="chip" type="button" onclick="quickAdd(this,'Нужно долить')">Нужно долить</button></div></div>
+</div><div class="check" data-id="23">
+<div class="question">Шприцовня поменяна</div>
+<div class="statuses"><label><input type="radio" name="s23" data-state="ok"><span>✓ ОК</span></label><label><input type="radio" name="s23" data-state="issue"><span>! Замечание</span></label><label><input type="radio" name="s23" data-state="bad"><span>× Проблема</span></label></div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Поменяна')">Поменяна</button><button class="chip" type="button" onclick="quickAdd(this,'Не поменяна')">Не поменяна</button><button class="chip" type="button" onclick="quickAdd(this,'Поменять сейчас')">Поменять сейчас</button></div></div>
+</div></div></div></details>
 <details class="category" ><summary><span class="catname"><i class="dot"></i>Цены и маркировка</span><span class="count" id="cat2">0/4</span></summary><div class="categoryBody"><div class="check" data-id="13">
 <div class="question">Цены актуальны</div>
 <div class="statuses">
@@ -345,6 +361,39 @@ body:before{opacity:.025!important;background-image:linear-gradient(rgba(255,255
 </div>
 <div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Всё готово')">Всё готово</button><button class="chip" type="button" onclick="quickAdd(this,'Есть недочёты')">Есть недочёты</button><button class="chip" type="button" onclick="quickAdd(this,'Нужно привести в порядок')">Нужно привести в порядок</button></div></div>
 </div></div></details>
+<details class="category"><summary><span class="catname"><i class="dot"></i>Инструменты</span><span class="count" id="cat4">0/8</span></summary><div class="categoryBody"><div class="check" data-id="24">
+<div class="question">Шприцовня чистая</div>
+<div class="statuses"><label><input type="radio" name="s24" data-state="ok"><span>✓ ОК</span></label><label><input type="radio" name="s24" data-state="issue"><span>! Замечание</span></label><label><input type="radio" name="s24" data-state="bad"><span>× Проблема</span></label></div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Чистая')">Чистая</button><button class="chip" type="button" onclick="quickAdd(this,'Есть загрязнение')">Есть загрязнение</button><button class="chip" type="button" onclick="quickAdd(this,'Почистить')">Почистить</button></div></div>
+</div><div class="check" data-id="25">
+<div class="question">Вода для шприцовни есть</div>
+<div class="statuses"><label><input type="radio" name="s25" data-state="ok"><span>✓ ОК</span></label><label><input type="radio" name="s25" data-state="issue"><span>! Замечание</span></label><label><input type="radio" name="s25" data-state="bad"><span>× Проблема</span></label></div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Вода есть')">Вода есть</button><button class="chip" type="button" onclick="quickAdd(this,'Воды нет')">Воды нет</button><button class="chip" type="button" onclick="quickAdd(this,'Нужно долить')">Нужно долить</button></div></div>
+</div><div class="check" data-id="26">
+<div class="question">Шприцовня поменяна</div>
+<div class="statuses"><label><input type="radio" name="s26" data-state="ok"><span>✓ ОК</span></label><label><input type="radio" name="s26" data-state="issue"><span>! Замечание</span></label><label><input type="radio" name="s26" data-state="bad"><span>× Проблема</span></label></div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Поменяна')">Поменяна</button><button class="chip" type="button" onclick="quickAdd(this,'Не поменяна')">Не поменяна</button><button class="chip" type="button" onclick="quickAdd(this,'Поменять сейчас')">Поменять сейчас</button></div></div>
+</div><div class="check" data-id="27">
+<div class="question">Есть запасные шприцы</div>
+<div class="statuses"><label><input type="radio" name="s27" data-state="ok"><span>✓ ОК</span></label><label><input type="radio" name="s27" data-state="issue"><span>! Замечание</span></label><label><input type="radio" name="s27" data-state="bad"><span>× Проблема</span></label></div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Есть запас')">Есть запас</button><button class="chip" type="button" onclick="quickAdd(this,'Не хватает')">Не хватает</button><button class="chip" type="button" onclick="quickAdd(this,'Нужно докупить')">Нужно докупить</button></div></div>
+</div><div class="check" data-id="28">
+<div class="question">Шприцы 1 мл есть</div>
+<div class="statuses"><label><input type="radio" name="s28" data-state="ok"><span>✓ ОК</span></label><label><input type="radio" name="s28" data-state="issue"><span>! Замечание</span></label><label><input type="radio" name="s28" data-state="bad"><span>× Проблема</span></label></div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Есть')">Есть</button><button class="chip" type="button" onclick="quickAdd(this,'Не хватает')">Не хватает</button><button class="chip" type="button" onclick="quickAdd(this,'Закончились')">Закончились</button></div></div>
+</div><div class="check" data-id="29">
+<div class="question">Шприцы 5 мл есть</div>
+<div class="statuses"><label><input type="radio" name="s29" data-state="ok"><span>✓ ОК</span></label><label><input type="radio" name="s29" data-state="issue"><span>! Замечание</span></label><label><input type="radio" name="s29" data-state="bad"><span>× Проблема</span></label></div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Есть')">Есть</button><button class="chip" type="button" onclick="quickAdd(this,'Не хватает')">Не хватает</button><button class="chip" type="button" onclick="quickAdd(this,'Закончились')">Закончились</button></div></div>
+</div><div class="check" data-id="30">
+<div class="question">Шприцы 10 мл есть</div>
+<div class="statuses"><label><input type="radio" name="s30" data-state="ok"><span>✓ ОК</span></label><label><input type="radio" name="s30" data-state="issue"><span>! Замечание</span></label><label><input type="radio" name="s30" data-state="bad"><span>× Проблема</span></label></div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Есть')">Есть</button><button class="chip" type="button" onclick="quickAdd(this,'Не хватает')">Не хватает</button><button class="chip" type="button" onclick="quickAdd(this,'Закончились')">Закончились</button></div></div>
+</div><div class="check" data-id="31">
+<div class="question">Шприцы 20 мл есть</div>
+<div class="statuses"><label><input type="radio" name="s31" data-state="ok"><span>✓ ОК</span></label><label><input type="radio" name="s31" data-state="issue"><span>! Замечание</span></label><label><input type="radio" name="s31" data-state="bad"><span>× Проблема</span></label></div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Есть')">Есть</button><button class="chip" type="button" onclick="quickAdd(this,'Не хватает')">Не хватает</button><button class="chip" type="button" onclick="quickAdd(this,'Закончились')">Закончились</button></div></div>
+</div></div></details>
 </section>
 
 <section class="tab" id="tab-missing">
@@ -398,36 +447,15 @@ body:before{opacity:.025!important;background-image:linear-gradient(rgba(255,255
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 const groups=[
- {name:"Выкладка жидкостей",items:[
-  "Жидкости выложены аккуратно и логично",
-  "Ароматизаторы расставлены по алфавиту",
-  "Нет хаоса, перемешанных вкусов и брендов",
-  "Поды, баки, картриджи и испарители выложены аккуратно",
-  "Товар на витрине заполнен и представлен равномерно"
- ]},
- {name:"Чистота",items:[
-  "Все полки чистые",
-  "Под ароматизаторами чисто",
-  "Витрины и стекла чистые",
-  "Рабочее место чистое",
-  "Зона отдыха чистая и аккуратная",
-  "Поды и кальяны чистые",
-  "Нет мусора, коробок и лишних вещей"
- ]},
- {name:"Цены и маркировка",items:[
-  "Цены актуальны",
-  "Ценники соответствуют товару",
-  "Штрихкоды есть там, где должны быть",
-  "Штрихкоды читаемые и правильно размещены"
- ]},
- {name:"Состояние магазина",items:[
-  "Повреждения товара или витрин зафиксированы",
-  "Все проблемы магазина зафиксированы",
-  "Магазин в целом выглядит аккуратно и готов к работе"
- ]}
+ {name:"Выкладка жидкостей",items:["Жидкости выложены аккуратно и логично","Ароматизаторы расставлены по алфавиту","Нет хаоса, перемешанных вкусов и брендов","Поды, баки, картриджи и испарители выложены аккуратно","Товар на витрине заполнен и представлен равномерно"]},
+ {name:"Чистота",items:["Все полки чистые","Под ароматизаторами чисто","Витрины и стекла чистые","Рабочее место чистое","Зона отдыха чистая и аккуратная","Поды и кальяны чистые","Нет мусора, коробок и лишних вещей","Вода для пола есть","Пол помыт","Вода для шприцовни есть","Шприцовня поменяна"]},
+ {name:"Цены и маркировка",items:["Цены актуальны","Ценники соответствуют товару","Штрихкоды есть там, где должны быть","Штрихкоды читаемые и правильно размещены"]},
+ {name:"Состояние магазина",items:["Повреждения товара или витрин зафиксированы","Все проблемы магазина зафиксированы","Магазин в целом выглядит аккуратно и готов к работе"]},
+ {name:"Инструменты",items:["Шприцовня чистая","Вода для шприцовни есть","Шприцовня поменяна","Есть запасные шприцы","Шприцы 1 мл есть","Шприцы 5 мл есть","Шприцы 10 мл есть","Шприцы 20 мл есть"]}
 ];
 const quick=["Протереть","Переставить","Исправить цену","Добавить штрихкод","Убрать лишнее","Заказать"];
 let total=0;
+function scoreData(){let max=0,earned=0;document.querySelectorAll(".check").forEach(c=>{const r=c.querySelector(".statuses input:checked"),st=r?.dataset.state;if(st!=="na"){max++;if(st==="ok")earned++;else if(st==="issue")earned+=.5}});return {score:max?Math.round(earned/max*100):0,earned,max}}
 
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
@@ -458,12 +486,11 @@ document.addEventListener("input",e=>{if(e.target.matches("input,select,textarea
 
 function update(){
  let filled=0,issues=0,bad=0;
- document.querySelectorAll(".check").forEach(c=>{
-  const r=c.querySelector(".statuses input:checked");if(r){filled++;if(r.dataset.state==="issue")issues++;if(r.dataset.state==="bad")bad++}
- });
- $("done").textContent=filled+"/"+total;$("issues").textContent=issues;$("bad").textContent=bad;$("pct").textContent=total?Math.round(filled/total*100)+"%":"0%";$("bar").style.width=total?(filled/total*100)+"%":"0%";
- const score=total?Math.round(filled/total*100):0; const ring=$("scoreRing"); if(ring){ring.style.setProperty("--score",score);$("scoreBig").textContent=score+"%";$("scoreCaption").textContent=filled+" из "+total}
- let offset=0;groups.forEach((g,gi)=>{let n=0;document.querySelectorAll(".check").forEach((c,i)=>{if(i>=offset&&i<offset+g.items.length&&c.querySelector(".statuses input:checked"))n++});$("cat"+gi).textContent=n+"/"+g.items.length;offset+=g.items.length});
+ document.querySelectorAll(".check").forEach(c=>{const r=c.querySelector(".statuses input:checked");if(r&&r.dataset.state!=="na"){filled++;if(r.dataset.state==="issue")issues++;if(r.dataset.state==="bad")bad++}});
+ const sd=scoreData();
+ $("done").textContent=filled+"/"+total;$("issues").textContent=issues;$("bad").textContent=bad;$("points").textContent=sd.score+"/100";$("bar").style.width=total?(filled/total*100)+"%":"0%";
+ const ring=$("scoreRing");if(ring){ring.style.setProperty("--score",sd.score);$("scoreBig").textContent=sd.score+"%";$("scoreCaption").textContent=filled+" из "+total}
+ let offset=0;groups.forEach((g,gi)=>{let n=0;document.querySelectorAll(".check").forEach((c,i)=>{if(i>=offset&&i<offset+g.items.length&&c.querySelector(".statuses input:checked"))n++});const el=$("cat"+gi);if(el)el.textContent=n+"/"+g.items.length;offset+=g.items.length});
  buildTasks();updateReport()
 }
 function collect(){
@@ -475,9 +502,9 @@ function collect(){
  manual:Array.from(document.querySelectorAll(".manualText")).map(x=>x.value)
  }
 }
-function save(){localStorage.setItem("GDE_Control_V14",JSON.stringify(collect()));$("saveState").textContent="● сохранено"}
+function save(){localStorage.setItem("GDE_Control_V15",JSON.stringify(collect()));$("saveState").textContent="● сохранено"}
 function load(){
- const raw=localStorage.getItem("GDE_Control_V14");if(!raw)return;
+ const raw=localStorage.getItem("GDE_Control_V15");if(!raw)return;
  try{const d=JSON.parse(raw);$("store").value=d.store||"Пушка";$("date").value=d.date||localDate();$("checker").value=d.checker||"";$("seller").value=d.seller||"";$("finalComment").value=d.final||"";
  (d.checks||[]).forEach((x,i)=>{const c=document.querySelectorAll(".check")[i];if(!c)return;if(x.state){const r=c.querySelector(`[data-state="${x.state}"]`);if(r)r.checked=true;c.classList.toggle("problemOn",!["ok","na"].includes(x.state))}c.querySelector(".problemText").value=x.text||""});
  (d.missing||[]).forEach(x=>addMissing(x.name,x.qty));(d.moves||[]).forEach(x=>addMove(x));(d.manual||[]).filter(Boolean).forEach(x=>addManualTask(x));
@@ -512,7 +539,8 @@ function buildTasks(){
 function updateReport(){
  const c=collect(),t=taskData(),filled=c.checks.filter(x=>x.state).length;
  $("reportTitle").textContent=c.store+" · "+(filled+"/"+total);
- $("reportSub").textContent=`${t.length} задач · ${c.missing.filter(x=>x.name.trim()).length} недостающих позиций · ${c.moves.length} перемещений`;
+ const sd=scoreData();
+ $("reportSub").textContent=`${sd.score}/100 баллов · ${t.length} задач · ${c.missing.filter(x=>x.name.trim()).length} недостающих позиций · ${c.moves.length} перемещений`;
  const preview=$("reportPreview"); if(!preview)return;
  const only=$("onlyProblems").checked;
  let html="";
@@ -538,10 +566,10 @@ function table(head,rows){return `<table class="pdf-table"><thead><tr>${head.map
 function pdfPoints(checks){return checks.map((x,i)=>`<div class="pdf-point"><span class="pdf-point-num">${i+1}</span><span class="pdf-point-title">${esc(x.q)}</span><span class="pdf-point-status" style="color:${x.state==="bad"?"#c94f42":x.state==="issue"?"#a16f25":"#31845e"}">${statusName(x.state)}</span>${x.text?`<div class="pdf-point-comment">${esc(x.text)}</div>`:""}</div>`).join("")}
 function buildPdf(){
  $("pdfStage").innerHTML="";const c=collect(),sel=Array.from(document.querySelectorAll(".rep:checked")).map(x=>x.value),only=$("onlyProblems").checked;
- const filled=c.checks.filter(x=>x.state).length,tasks=taskData(),miss=c.missing.filter(x=>x.name.trim());
- if(sel.includes("summary")) page("Итог",`<div class="pdf-meta"><div class="pdf-box"><b>Магазин</b><br>${esc(c.store)}</div><div class="pdf-box"><b>Дата</b><br>${esc(c.date)}</div><div class="pdf-box"><b>Проверено</b><br>${filled}/${total}</div><div class="pdf-box"><b>Задач</b><br>${tasks.length}</div></div><div class="pdf-section">Общий вывод</div><div class="pdf-box">${esc(c.final||"Общий комментарий не указан.")}</div>`);
+ const filled=c.checks.filter(x=>x.state&&x.state!=="na").length,tasks=taskData(),miss=c.missing.filter(x=>x.name.trim()),sd=scoreData();
+ if(sel.includes("summary")) page("Итог",`<div class="pdf-meta"><div class="pdf-box"><b>Магазин</b><br>${esc(c.store)}</div><div class="pdf-box"><b>Дата</b><br>${esc(c.date)}</div><div class="pdf-box"><b>Готовность</b><br>${sd.score}%</div><div class="pdf-box"><b>Баллы</b><br>${sd.score}/100</div><div class="pdf-box"><b>Проверено</b><br>${filled}/${total}</div><div class="pdf-box"><b>Задач</b><br>${tasks.length}</div></div><div class="pdf-section">Общий вывод</div><div class="pdf-box">${esc(c.final||"Общий комментарий не указан.")}</div>`);
  if(sel.includes("check")){
-   [...document.querySelectorAll(".category")].forEach(cat=>{const title=cat.querySelector(".catname")?.textContent.trim()||"Проверка";const checks=[...cat.querySelectorAll(".check")].map((el,i)=>({q:el.querySelector(".question").textContent,state:el.querySelector(".statuses input:checked")?.dataset.state||"",text:el.querySelector(".problemText").value.trim()})).filter(x=>x.state&&(!only||x.state==="issue"));if(checks.length)page(title,`<div class="pdf-section">Пункты раздела</div>${pdfPoints(checks)}`)});
+   [...document.querySelectorAll(".category")].forEach(cat=>{const title=cat.querySelector(".catname")?.textContent.trim()||"Проверка";const checks=[...cat.querySelectorAll(".check")].map((el,i)=>({q:el.querySelector(".question").textContent,state:el.querySelector(".statuses input:checked")?.dataset.state||"",text:el.querySelector(".problemText").value.trim()})).filter(x=>x.state&&(!only||x.state==="issue"||x.state==="bad"));if(checks.length)page(title,`<div class="pdf-section">Пункты раздела</div>${pdfPoints(checks)}`)});
  }
  if(sel.includes("moves")){const valid=c.moves.filter(m=>m.items.some(x=>x.name.trim()));if(valid.length)page("Перемещения",valid.map(m=>`<div class="pdf-move"><div class="pdf-move-route">${esc(m.from||"—")} → ${esc(m.to||"—")}</div>${m.items.filter(x=>x.name.trim()).map(x=>`<div class="pdf-move-item"><span>${esc(x.name)}</span><span>${esc(x.qty||"—")}</span></div>`).join("")}</div>`).join(""));}
  if(sel.includes("tasks")&&tasks.length)page("Задачи магазина",tasks.map((x,i)=>`<div class="pdf-point"><span class="pdf-point-num">${i+1}</span><span class="pdf-point-title">${esc(x.title)}</span><span class="pdf-point-status" style="color:${x.status==="bad"?"#c94f42":"#a16f25"}">${x.status==="bad"?"ПРОБЛЕМА":"ЗАМЕЧАНИЕ"}</span><div class="pdf-point-comment">${esc(x.text)}</div></div>`).join(""));
@@ -556,7 +584,7 @@ async function downloadPDF(){
 }
 function newCheck(){
  if(!confirm("Начать новую проверку? Текущие данные будут очищены."))return;
- localStorage.removeItem("GDE_Control_V14");
+ localStorage.removeItem("GDE_Control_V15");
  $("store").value="Пушка";$("date").value=localDate();$("checker").value="";$("seller").value="";$("finalComment").value="";
  document.querySelectorAll(".check input[type=radio]").forEach(x=>x.checked=false);
  document.querySelectorAll(".problemText").forEach(x=>x.value="");
@@ -569,7 +597,7 @@ function newCheck(){
  openTab("check",document.querySelector('.navBtn'));
 }
 function exportExcel(){
- const c=collect();let rows=[["GDE CONTROL"],["Магазин",c.store],["Дата",c.date],["Проверяющий",c.checker],["Продавец",c.seller],[],["Пункт","Статус","Комментарий"]];
+ const c=collect();const sd=scoreData();let rows=[["GDE CONTROL"],["Магазин",c.store],["Дата",c.date],["Проверяющий",c.checker],["Продавец",c.seller],["Баллы",sd.score+"/100"],[],["Пункт","Статус","Комментарий"]];
  c.checks.forEach((x,i)=>rows.push([document.querySelectorAll(".question")[i].textContent,statusName(x.state),x.text]));
  rows.push([],["Недостающий товар","Количество"]);c.missing.filter(x=>x.name).forEach(x=>rows.push([x.name,x.qty]));
  rows.push([],["Перемещения"]);c.moves.forEach(m=>m.items.filter(x=>x.name).forEach(x=>rows.push([m.from+" → "+m.to,x.name,x.qty])));
