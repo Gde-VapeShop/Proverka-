@@ -394,6 +394,11 @@ body:before{opacity:.025!important;background-image:linear-gradient(rgba(255,255
 <div class="statuses"><label><input type="radio" name="s31" data-state="ok"><span>✓ ОК</span></label><label><input type="radio" name="s31" data-state="issue"><span>! Замечание</span></label><label><input type="radio" name="s31" data-state="bad"><span>× Проблема</span></label></div>
 <div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши, что именно нужно исправить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Есть')">Есть</button><button class="chip" type="button" onclick="quickAdd(this,'Не хватает')">Не хватает</button><button class="chip" type="button" onclick="quickAdd(this,'Закончились')">Закончились</button></div></div>
 </div></div></details>
+<details class="category"><summary><span class="catname"><i class="dot"></i>Касса и учёт</span><span class="count" id="cat5">0/1</span></summary><div class="categoryBody"><div class="check" data-id="32">
+<div class="question">Касса сходится с фактическими остатками</div>
+<div class="statuses"><label><input type="radio" name="s32" data-state="ok"><span>✓ ОК</span></label><label><input type="radio" name="s32" data-state="issue"><span>! Замечание</span></label><label><input type="radio" name="s32" data-state="bad"><span>× Проблема</span></label></div>
+<div class="problem"><div class="problemTitle">Комментарий к пункту</div><textarea class="problemText" placeholder="Опиши расхождение или что нужно проверить..."></textarea><div class="chips"><button class="chip" type="button" onclick="quickAdd(this,'Касса сходится')">Касса сходится</button><button class="chip" type="button" onclick="quickAdd(this,'Есть расхождение')">Есть расхождение</button><button class="chip" type="button" onclick="quickAdd(this,'Пересчитать кассу')">Пересчитать кассу</button></div></div>
+</div></div></details>
 </section>
 
 <section class="tab" id="tab-missing">
@@ -451,11 +456,31 @@ const groups=[
  {name:"Чистота",items:["Все полки чистые","Под ароматизаторами чисто","Витрины и стекла чистые","Рабочее место чистое","Зона отдыха чистая и аккуратная","Поды и кальяны чистые","Нет мусора, коробок и лишних вещей","Вода для пола есть","Пол помыт","Вода для шприцовни есть","Шприцовня поменяна"]},
  {name:"Цены и маркировка",items:["Цены актуальны","Ценники соответствуют товару","Штрихкоды есть там, где должны быть","Штрихкоды читаемые и правильно размещены"]},
  {name:"Состояние магазина",items:["Повреждения товара или витрин зафиксированы","Все проблемы магазина зафиксированы","Магазин в целом выглядит аккуратно и готов к работе"]},
- {name:"Инструменты",items:["Шприцовня чистая","Вода для шприцовни есть","Шприцовня поменяна","Есть запасные шприцы","Шприцы 1 мл есть","Шприцы 5 мл есть","Шприцы 10 мл есть","Шприцы 20 мл есть"]}
+ {name:"Инструменты",items:["Шприцовня чистая","Вода для шприцовни есть","Шприцовня поменяна","Есть запасные шприцы","Шприцы 1 мл есть","Шприцы 5 мл есть","Шприцы 10 мл есть","Шприцы 20 мл есть"]},
+ {name:"Касса и учёт",items:["Касса сходится с фактическими остатками"]}
 ];
 const quick=["Протереть","Переставить","Исправить цену","Добавить штрихкод","Убрать лишнее","Заказать"];
 let total=0;
-function scoreData(){let max=0,earned=0;document.querySelectorAll(".check").forEach(c=>{const r=c.querySelector(".statuses input:checked"),st=r?.dataset.state;if(st!=="na"){max++;if(st==="ok")earned++;else if(st==="issue")earned+=.5}});return {score:max?Math.round(earned/max*100):0,earned,max}}
+function scoreData(){
+ const weights={"Выкладка жидкостей":22.5,"Чистота":27,"Цены и маркировка":22.5,"Состояние магазина":18,"Инструменты":0,"Касса и учёт":10};
+ let earned=0,max=0;
+ document.querySelectorAll(".category").forEach(cat=>{
+   const title=cat.querySelector(".catname")?.textContent.trim()||"";
+   const weight=weights[title]??0;
+   if(weight<=0)return;
+   const checks=[...cat.querySelectorAll(".check")];
+   const active=checks.filter(c=>c.querySelector(".statuses input:checked")?.dataset.state!=="na");
+   if(!active.length)return;
+   const per=weight/active.length;
+   max+=weight;
+   active.forEach(c=>{
+     const st=c.querySelector(".statuses input:checked")?.dataset.state;
+     if(st==="ok")earned+=per;
+     else if(st==="issue")earned+=per*.5;
+   });
+ });
+ return {score:max?Math.round(earned/max*100):0,earned,max};
+}
 
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
@@ -502,9 +527,9 @@ function collect(){
  manual:Array.from(document.querySelectorAll(".manualText")).map(x=>x.value)
  }
 }
-function save(){localStorage.setItem("GDE_Control_V15",JSON.stringify(collect()));$("saveState").textContent="● сохранено"}
+function save(){localStorage.setItem("GDE_Control_V16",JSON.stringify(collect()));$("saveState").textContent="● сохранено"}
 function load(){
- const raw=localStorage.getItem("GDE_Control_V15");if(!raw)return;
+ const raw=localStorage.getItem("GDE_Control_V16");if(!raw)return;
  try{const d=JSON.parse(raw);$("store").value=d.store||"Пушка";$("date").value=d.date||localDate();$("checker").value=d.checker||"";$("seller").value=d.seller||"";$("finalComment").value=d.final||"";
  (d.checks||[]).forEach((x,i)=>{const c=document.querySelectorAll(".check")[i];if(!c)return;if(x.state){const r=c.querySelector(`[data-state="${x.state}"]`);if(r)r.checked=true;c.classList.toggle("problemOn",!["ok","na"].includes(x.state))}c.querySelector(".problemText").value=x.text||""});
  (d.missing||[]).forEach(x=>addMissing(x.name,x.qty));(d.moves||[]).forEach(x=>addMove(x));(d.manual||[]).filter(Boolean).forEach(x=>addManualTask(x));
@@ -584,7 +609,7 @@ async function downloadPDF(){
 }
 function newCheck(){
  if(!confirm("Начать новую проверку? Текущие данные будут очищены."))return;
- localStorage.removeItem("GDE_Control_V15");
+ localStorage.removeItem("GDE_Control_V16");
  $("store").value="Пушка";$("date").value=localDate();$("checker").value="";$("seller").value="";$("finalComment").value="";
  document.querySelectorAll(".check input[type=radio]").forEach(x=>x.checked=false);
  document.querySelectorAll(".problemText").forEach(x=>x.value="");
